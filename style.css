@@ -1,1 +1,17 @@
+body { font-family: 'Segoe UI', sans-serif; background-color: #f5f8fa; color: #2c3e50; margin: 0; padding: 2rem; }
 
+h1 { text-align: center; margin-bottom: 2rem; font-size: 2rem; color: #34495e; }
+
+#malla { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+
+.semestre { background-color: #eaf0f6; border-left: 4px solid #5dade2; padding: 1rem; border-radius: 0.5rem; }
+
+.semestre h2 { margin-top: 0; font-size: 1.25rem; color: #2e86c1; }
+
+.materia { background-color: #ffffff; border: 1px solid #d0d7de; padding: 0.75rem 1rem; margin-bottom: 0.5rem; border-radius: 0.4rem; cursor: pointer; transition: all 0.3s; }
+
+.materia:hover { background-color: #ebf5fb; }
+
+.materia.aprobada { background-color: #d4efdf; border-color: #27ae60; text-decoration: line-through; }
+
+.materia.bloqueada { background-color: #f0f0f0; color: #aaa; pointer-events: none; border-style: dashed; }
