@@ -1,0 +1,70 @@
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #444;
+    margin-bottom: 30px;
+}
+
+#creditosTotales {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c2c2c;
+}
+
+.semestres-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.semestre {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    width: 90%;
+    max-width: 800px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.semestre h2 {
+    font-size: 18px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.materia {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 6px 0;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #e6e8eb;
+    transition: background-color 0.3s ease;
+}
+
+.materia.completada {
+    background-color: #cfd4d9;
+    text-decoration: line-through;
+    color: #888;
+}
+
+button.opcion {
+    margin-left: 10px;
+    padding: 4px 8px;
+    font-size: 12px;
+    cursor: pointer;
+}
