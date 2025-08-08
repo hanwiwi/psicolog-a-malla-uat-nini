@@ -1,0 +1,41 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+}
+.semesters {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.semester {
+    background-color: #e0e0e0;
+    padding: 15px;
+    border-radius: 8px;
+}
+.semester h2 {
+    margin-top: 0;
+    text-transform: uppercase;
+}
+.course {
+    background-color: #ccc;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.course.completed {
+    background-color: #888;
+    text-decoration: line-through;
+}
+#creditCounter {
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
