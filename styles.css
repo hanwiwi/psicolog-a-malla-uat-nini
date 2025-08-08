@@ -1,0 +1,65 @@
+
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+header {
+    background: #e0e0e0;
+    text-align: center;
+    padding: 20px 10px;
+    border-bottom: 2px solid #ccc;
+}
+h1 {
+    margin: 0;
+    font-size: 1.6em;
+}
+main {
+    padding: 20px;
+}
+.semestre {
+    background: #fff;
+    margin-bottom: 30px;
+    border-left: 5px solid #888;
+    padding: 20px;
+    border-radius: 8px;
+}
+.semestre h2 {
+    margin-top: 0;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    color: #444;
+}
+.materia {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+.materia input[type="checkbox"] {
+    margin-right: 10px;
+}
+.materia label {
+    flex-grow: 1;
+}
+.creditos {
+    font-weight: bold;
+    margin-left: auto;
+}
+.opciones {
+    margin-left: 25px;
+    margin-top: 5px;
+}
+.opciones label {
+    font-size: 0.95em;
+}
+.creditos-totales {
+    margin-top: 10px;
+    font-weight: bold;
+}
+footer {
+    text-align: center;
+    font-size: 0.9em;
+    color: #888;
+    margin: 40px 0 20px;
+}
