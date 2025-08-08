@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f5f6f7;
+  color: #333;
+}
+header {
+  padding: 20px;
+  background: #e0e0e0;
+  text-align: center;
+}
+footer {
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+  color: #888;
+}
+.semestre {
+  padding: 20px;
+  border-top: 2px solid #ccc;
+}
+.semestre h2 {
+  margin-top: 0;
+  font-size: 24px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.materia {
+  background: #ffffff;
+  border: 1px solid #ccc;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 6px;
+  transition: background 0.3s, color 0.3s;
+  cursor: pointer;
+}
+.materia.bloqueada {
+  background: #eee;
+  color: #999;
+  cursor: not-allowed;
+}
+.materia.aprobada {
+  background: #cccccc;
+  color: #333;
+}
+.opciones {
+  margin-top: 8px;
+}
+.opcion {
+  display: inline-block;
+  background: #eaeaea;
+  padding: 6px 10px;
+  margin: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.opcion.aprobada {
+  background: #bbbbbb;
+  color: #fff;
+}
+#creditos-totales {
+  margin-top: 10px;
+  font-weight: bold;
+}
