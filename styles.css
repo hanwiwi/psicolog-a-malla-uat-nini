@@ -1,0 +1,47 @@
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f6f9;
+  color: #333;
+  margin: 0;
+  padding: 2rem;
+}
+
+h1 {
+  text-align: center;
+  color: #444;
+}
+
+.semestre {
+  margin-bottom: 3rem;
+  padding: 1rem;
+  border-left: 6px solid #ccc;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.semestre h2 {
+  text-transform: uppercase;
+  color: #222;
+  margin-top: 0;
+}
+
+.materia {
+  background: #e0e4ea;
+  border-radius: 6px;
+  padding: 10px 15px;
+  margin: 8px 0;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.materia.aprobada {
+  background: #b0b0b0;
+  text-decoration: line-through;
+}
+
+.opciones {
+  margin-left: 1.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
