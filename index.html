@@ -1,171 +1,78 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Malla Psicología UAT — @Nini (vista previa)</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Malla Psicología UAT — @Nini (completa)</title>
 <style>
-  :root{
-    --bg:#f4f7fb;
-    --panel:#ffffff;
-    --muted:#91a0b3;
-    --accent:#c3cdd6; /* gris azulado suave */
-    --card:#e9eef4;
-    --card-checked:#c8cfd6;
-    --text:#222;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background:var(--bg);
-    color:var(--text);
-    padding:24px;
-  }
-  header{
-    text-align:center;
-    margin-bottom:18px;
-  }
-  header h1{
-    margin:0;
-    font-size:20px;
-    letter-spacing:1px;
-  }
-  header p{margin:6px 0 0;color:var(--muted)}
-  #controls{
-    display:flex;
-    gap:12px;
-    justify-content:center;
-    align-items:center;
-    margin-top:14px;
-    flex-wrap:wrap;
-  }
-  .counter{
-    background:var(--panel);
-    border-radius:10px;
-    padding:10px 14px;
-    box-shadow:0 4px 18px rgba(0,0,0,0.04);
-    font-weight:600;
-  }
-  main{
-    max-width:1100px;
-    margin:20px auto 80px;
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-    padding:0 12px;
-  }
-  .semester{
-    background:var(--panel);
-    border-left:6px solid var(--accent);
-    border-radius:10px;
-    padding:14px;
-    box-shadow:0 6px 20px rgba(16,24,40,0.04);
-  }
-  .semester h2{
-    margin:0 0 8px;
-    text-transform:uppercase;
-    font-size:15px;
-    letter-spacing:0.6px;
-  }
-  .sem-info{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:12px;
-    margin-bottom:8px;
-    color:var(--muted);
-    font-size:13px;
-  }
-  .subjects{
-    display:grid;
-    grid-template-columns: 1fr;
-    gap:8px;
-  }
-  @media(min-width:880px){
-    .subjects{
-      grid-template-columns: repeat(2, minmax(0,1fr));
-    }
-  }
-  .card{
-    background:var(--card);
-    border-radius:8px;
-    padding:10px 12px;
-    display:flex;
-    gap:12px;
-    align-items:center;
-    justify-content:space-between;
-    border:1px solid rgba(0,0,0,0.03);
-    transition:transform .14s, background .14s, box-shadow .14s;
-    cursor:pointer;
-  }
-  .card:hover{ transform:translateY(-3px); box-shadow:0 8px 18px rgba(2,6,23,0.06) }
-  .card.locked{ opacity:0.45; cursor:not-allowed; transform:none; box-shadow:none; }
-  .card.checked{ background:var(--card-checked); text-decoration:line-through; color:#444 }
-  .card-left{display:flex; gap:12px; align-items:center; flex:1}
-  .code{
-    min-width:40px;
-    height:40px;
-    border-radius:8px;
-    background:linear-gradient(180deg,rgba(0,0,0,0.03),transparent);
-    display:flex; align-items:center; justify-content:center;
-    font-weight:700; color:var(--muted); font-size:12px;
-  }
-  .meta{
-    display:flex; flex-direction:column;
-  }
-  .name{ font-weight:600; font-size:14px }
-  .credits{ font-size:12px; color:var(--muted); margin-top:4px }
-  .actions{ display:flex; gap:8px; align-items:center }
-  .btn{
-    background:transparent;
-    border:1px solid #9aa8b6;
-    padding:6px 8px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:13px; color:#fff;
-    background:var(--muted);
-  }
-  .btn.small{ padding:4px 6px; font-size:12px }
-  .opt-group{ margin-top:8px; display:flex; gap:8px; flex-wrap:wrap }
-  .opt{
-    background:#fff; border-radius:8px; padding:6px 8px; border:1px solid #d6dfe8; font-size:13px; cursor:pointer;
-  }
-  .opt.selected{ background:var(--muted); color:white; border-color:transparent }
-  footer{ text-align:center; margin-top:18px; color:var(--muted) }
-  .per-sem-credits{ font-weight:700; color:var(--text) }
-  .small-muted{ font-size:12px; color:var(--muted) }
-  .topbar{
-    display:flex; justify-content:space-between; align-items:center; gap:12px; max-width:1100px; margin:0 auto;
-  }
-  .instructions{ font-size:13px; color:var(--muted) }
+:root{
+  --bg:#f4f7fb;
+  --panel:#ffffff;
+  --muted:#7f8c97;
+  --accent:#bfc9d3;
+  --card:#eaf0f6;
+  --card-checked:#cfd6dc;
+  --text:#222;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text);padding:22px}
+header{max-width:1100px;margin:0 auto 14px;text-align:center}
+h1{margin:0;font-size:20px;letter-spacing:0.6px}
+header p{margin:6px 0 0;color:var(--muted)}
+.top{max-width:1100px;margin:12px auto;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.counter{background:var(--panel);padding:10px 12px;border-radius:10px;box-shadow:0 6px 18px rgba(2,6,23,0.06);font-weight:700}
+.controls{display:flex;gap:8px;align-items:center}
+.btn{background:transparent;border:1px solid rgba(0,0,0,0.08);padding:6px 8px;border-radius:8px;cursor:pointer}
+.btn.secondary{background:var(--muted);color:white;border:0}
+.instructions{color:var(--muted);font-size:13px}
+main{max-width:1100px;margin:18px auto;display:flex;flex-direction:column;gap:18px;padding:0 6px}
+.semester{background:var(--panel);border-left:6px solid var(--accent);border-radius:10px;padding:14px;box-shadow:0 6px 20px rgba(16,24,40,0.04)}
+.semester h2{margin:0 0 8px;text-transform:uppercase;font-size:14px}
+.sem-info{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:13px;margin-bottom:8px}
+.subjects{display:grid;grid-template-columns:1fr;gap:8px}
+@media(min-width:880px){ .subjects{grid-template-columns:repeat(2,1fr)} }
+.card{background:var(--card);border-radius:8px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid rgba(0,0,0,0.03);transition:transform .12s,box-shadow .12s;cursor:pointer}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(2,6,23,0.06)}
+.card.locked{opacity:0.45;cursor:not-allowed;transform:none;box-shadow:none}
+.card.checked{background:var(--card-checked);text-decoration:line-through;color:#444}
+.left{display:flex;gap:12px;align-items:center;flex:1}
+.badge{min-width:40px;height:40px;border-radius:8px;background:linear-gradient(180deg,rgba(0,0,0,0.02),transparent);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--muted);font-size:12px}
+.meta{display:flex;flex-direction:column}
+.name{font-weight:700;font-size:14px}
+.credits{font-size:13px;color:var(--muted);margin-top:4px}
+.actions{display:flex;gap:8px;align-items:center}
+.approve{background:var(--muted);color:white;border:0;padding:6px 8px;border-radius:8px;cursor:pointer;font-weight:600}
+.approve.small{padding:4px 6px;font-size:13px}
+.opt-group{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
+.opt{background:#fff;border-radius:8px;padding:6px 8px;border:1px solid #d6dfe8;font-size:13px;cursor:pointer}
+.opt.selected{background:var(--muted);color:#fff;border-color:transparent}
+.small-muted{font-size:12px;color:var(--muted)}
+footer{text-align:center;margin-top:18px;color:var(--muted);font-size:13px}
+.reset{background:transparent;border:1px solid #ddd;padding:6px 8px;border-radius:8px;cursor:pointer}
 </style>
 </head>
 <body>
 
 <header>
   <h1>MALLA CURRICULAR PSICOLOGÍA UAT</h1>
-  <p>@Nini — interactiva • vertical • monócromo</p>
-  <div id="controls" class="topbar" style="margin-top:12px;">
-    <div class="counter">Total aprobados: <span id="total-counter">0</span> créditos</div>
-    <div class="instructions">Haz clic en una materia para aprobarla. Si una materia tiene requisito, aparece bloqueada hasta cumplirlo.</div>
-    <div class="counter">Mostrar: <span id="filter-info">todos</span></div>
-  </div>
+  <p>@Nini • interactiva • vertical • monócromo</p>
 </header>
+
+<div class="top">
+  <div class="counter">Total aprobados: <span id="total-counter">0</span> créditos</div>
+  <div class="controls">
+    <button class="btn" id="show-all">Mostrar: todos</button>
+    <button class="btn reset" id="reset">Reset progreso</button>
+  </div>
+  <div class="instructions">Haz clic en la materia para aprobarla. Si está bloqueada, cumple su requisito primero.</div>
+</div>
 
 <main id="main"></main>
 
-<footer>
-  <p class="small-muted">Guardado automático en el navegador • Firma: @Nini</p>
-</footer>
+<footer><p>Guardado en el navegador • Firma: @Nini</p></footer>
 
 <script>
-/* ===========================
-   Datos completos: semestres I a IX
-   - id: identificador único (sin tildes para facilidad)
-   - req: array de ids que son requisitos
-   - opciones: array de strings (para optativas / habilita)
-   =========================== */
+/* ---------- DATOS: Semestres I - IX (ids sin tildes) ---------- */
 const DATA = [
   {sem:1, id:"procesos_mentales", name:"PROCESOS MENTALES", credits:4},
   {sem:1, id:"psicologia_ninez_adolescencia", name:"PSICOLOGIA DE LA NIÑEZ Y LA ADOLESCENCIA", credits:5},
@@ -219,7 +126,7 @@ const DATA = [
   {sem:6, id:"evaluacion_clinica_nna", name:"EVALUACION PSICOLOGICA CLINICA EN NINOS Y ADOLESCENTES", credits:6},
   {sem:6, id:"intervencion_organizacional", name:"INTERVENCION EN EL AMBITO ORGANIZACIONAL", credits:3},
   {sem:6, id:"intervencion_psicodinamica", name:"INTERVENCION PSICODINAMICA", credits:4},
-  {sem:6, id:"psicologia_humanista", name:"PSICOLOGIA HUMANISTA", credits:4, req:[]},
+  {sem:6, id:"psicologia_humanista", name:"PSICOLOGIA HUMANISTA", credits:4},
   {sem:6, id:"reclutamiento_seleccion", name:"RECLUTAMIENTO, SELECCION Y CAPACITACION", credits:4},
   {sem:6, id:"electiva_iii", name:"ELECTIVA DISCIPLINAR/PROFESIONAL III", credits:4, opciones:["CONSULTORIA Y ASESORIA EN RECURSOS HUMANOS","INTERVENCION EN CRISIS","PSICOTERAPIA DE FAMILIA Y PAREJA","TALLER DE INTERVENCION DE GRUPOS","TALLER DE MEDIACION","TERAPIA FAMILIAR SISTEMICA"]},
   {sem:6, id:"practicas_pre_ii", name:"PRACTICAS PRE-PROFESIONALES II", credits:5},
@@ -251,85 +158,170 @@ const DATA = [
   {sem:9, id:"presentacion_proyecto_final", name:"PRESENTACION DEL PROYECTO FINAL", credits:5}
 ];
 
-/* ---------- Estado en localStorage ----------
-   - approved: Set of ids approved (true)
-   - selectedOptions: map id -> selected option text (for optativas/habilita)
-*/
-const LS_KEY_APPROVED = "malla_approved_v2";
-const LS_KEY_OPTIONS = "malla_options_v2";
+/* ---------- Local Storage keys ---------- */
+const LS_APPROVED = "malla_approved_v3";
+const LS_OPTIONS = "malla_options_v3";
 
-/* Utility */
-function bySem(sem){
-  return DATA.filter(d => d.sem===sem);
+/* ---------- Helpers ---------- */
+function getApproved(){
+  try{ return new Set(JSON.parse(localStorage.getItem(LS_APPROVED) || "[]")); }catch(e){ return new Set(); }
 }
-function getApprovedSet(){
-  try{
-    return new Set(JSON.parse(localStorage.getItem(LS_KEY_APPROVED) || "[]"));
-  }catch(e){ return new Set() }
+function saveApproved(set){
+  localStorage.setItem(LS_APPROVED, JSON.stringify([...set]));
 }
-function saveApprovedSet(set){
-  localStorage.setItem(LS_KEY_APPROVED, JSON.stringify([...set]));
-}
-function getOptionsMap(){
-  try{
-    return JSON.parse(localStorage.getItem(LS_KEY_OPTIONS) || "{}");
-  }catch(e){ return {} }
-}
-function saveOptionsMap(m){
-  localStorage.setItem(LS_KEY_OPTIONS, JSON.stringify(m));
+function getOptions(){ try{ return JSON.parse(localStorage.getItem(LS_OPTIONS) || "{}"); }catch(e){ return {} } }
+function saveOptions(map){ localStorage.setItem(LS_OPTIONS, JSON.stringify(map)); }
+
+/* is a subject unlocked? */
+function isUnlocked(subj, approved){
+  if(!subj.req || subj.req.length===0) return true;
+  return subj.req.every(r => approved.has(r));
 }
 
-/* Compute whether a subject is unlocked: all its req ids are in approved */
-function isUnlocked(subject, approvedSet){
-  if(!subject.req || subject.req.length===0) return true;
-  return subject.req.every(rid => approvedSet.has(rid));
-}
-
-/* Recalculate per-semester and total credits */
-function calculateCredits(approvedSet){
-  const perSem = {};
-  let total = 0;
-  DATA.forEach(item=>{
-    if(approvedSet.has(item.id)){
-      perSem[item.sem] = (perSem[item.sem]||0) + item.credits;
-      total += item.credits;
+/* compute credits */
+function computeCredits(approved){
+  const per = {};
+  let total=0;
+  DATA.forEach(d=>{
+    if(approved.has(d.id)){
+      per[d.sem] = (per[d.sem]||0) + d.credits;
+      total += d.credits;
     }
   });
-  return {perSem, total};
+  return {per,total};
 }
 
-/* Rendering */
+/* rendering */
 function render(){
   const main = document.getElementById("main");
-  main.innerHTML = ""; // clear
-  const approved = getApprovedSet();
-  const options = getOptionsMap();
-
-  // Header totals
-  const totals = calculateCredits(approved);
+  main.innerHTML = "";
+  const approved = getApproved();
+  const options = getOptions();
+  const totals = computeCredits(approved);
   document.getElementById("total-counter").textContent = totals.total;
 
-  for(let s=1; s<=9; s++){
+  for(let s=1;s<=9;s++){
     const semBlock = document.createElement("section");
     semBlock.className = "semester";
-    const semTitle = document.createElement("h2");
-    semTitle.textContent = `SEMESTRE ${s}`;
-    semBlock.appendChild(semTitle);
+    const title = document.createElement("h2");
+    title.textContent = `SEMESTRE ${s}`;
+    semBlock.appendChild(title);
 
-    // info row
-    const infoRow = document.createElement("div");
-    infoRow.className = "sem-info";
-    const per = totals.perSem[s] || 0;
-    infoRow.innerHTML = `<div class="small-muted">Créditos semestre: <span class="per-sem-credits">${per}</span></div>
-                         <div class="small-muted">Materias: ${bySem(s).length}</div>`;
-    semBlock.appendChild(infoRow);
+    const info = document.createElement("div");
+    info.className = "sem-info";
+    const perCredits = totals.per[s] || 0;
+    info.innerHTML = `<div class="small-muted">Créditos semestre: <span class="per-sem-credits">${perCredits}</span></div><div class="small-muted">Materias: ${DATA.filter(x=>x.sem===s).length}</div>`;
+    semBlock.appendChild(info);
 
-    // subjects grid
-    const subjectsGrid = document.createElement("div");
-    subjectsGrid.className = "subjects";
+    const grid = document.createElement("div");
+    grid.className = "subjects";
 
-    bySem(s).forEach(item=>{
+    DATA.filter(x=>x.sem===s).forEach(item=>{
       const card = document.createElement("div");
       card.className = "card";
-      // locked?
       const unlocked = isUnlocked(item, approved);
+      if(!unlocked) card.classList.add("locked");
+      if(approved.has(item.id)) card.classList.add("checked");
+
+      // Left meta
+      const left = document.createElement("div");
+      left.className = "left";
+      const badge = document.createElement("div");
+      badge.className = "badge";
+      badge.textContent = item.id.split("_").slice(0,1)[0].toUpperCase();
+      const meta = document.createElement("div");
+      meta.className = "meta";
+      const name = document.createElement("div");
+      name.className = "name";
+      name.textContent = item.name;
+      const credits = document.createElement("div");
+      credits.className = "credits";
+      credits.textContent = `${item.credits} créditos`;
+      meta.appendChild(name);
+      meta.appendChild(credits);
+      left.appendChild(badge);
+      left.appendChild(meta);
+      card.appendChild(left);
+
+      // actions
+      const actions = document.createElement("div");
+      actions.className = "actions";
+
+      // options (if any)
+      if(item.opciones && item.opciones.length){
+        const optGroup = document.createElement("div");
+        optGroup.className = "opt-group";
+        item.opciones.forEach(opt=>{
+          const chip = document.createElement("button");
+          chip.type="button";
+          chip.className = "opt";
+          chip.textContent = opt;
+          if(options[item.id] === opt) chip.classList.add("selected");
+          chip.addEventListener("click", (ev)=>{
+            ev.stopPropagation();
+            options[item.id] = (options[item.id] === opt) ? null : opt;
+            if(!options[item.id]) delete options[item.id];
+            saveOptions(options);
+            render(); // rerender to show selection
+          });
+          optGroup.appendChild(chip);
+        });
+        actions.appendChild(optGroup);
+      }
+
+      // approve button
+      const btn = document.createElement("button");
+      btn.className = "approve";
+      btn.textContent = approved.has(item.id) ? "Aprobada ✓" : "Aprobar";
+      btn.disabled = !unlocked;
+      btn.addEventListener("click", (ev)=>{
+        ev.stopPropagation();
+        if(!unlocked) return;
+        if(approved.has(item.id)) approved.delete(item.id);
+        else approved.add(item.id);
+        saveApproved(approved);
+        render();
+      });
+      actions.appendChild(btn);
+
+      card.appendChild(actions);
+
+      // Clicking the card toggles approve (if unlocked)
+      card.addEventListener("click",(ev)=>{
+        if(!unlocked) return;
+        if(ev.target && (ev.target.tagName==="BUTTON" || ev.target.tagName==="SELECT" || ev.target.classList.contains("opt"))) return;
+        if(approved.has(item.id)) approved.delete(item.id);
+        else approved.add(item.id);
+        saveApproved(approved);
+        render();
+      });
+
+      grid.appendChild(card);
+    });
+
+    semBlock.appendChild(grid);
+    main.appendChild(semBlock);
+  }
+}
+
+/* Reset progress */
+document.addEventListener("DOMContentLoaded", ()=>{
+  document.getElementById("reset").addEventListener("click", ()=>{
+    if(confirm("Borrar TODO el progreso guardado?")) {
+      localStorage.removeItem(LS_APPROVED);
+      localStorage.removeItem(LS_OPTIONS);
+      render();
+    }
+  });
+  render();
+});
+
+/* Small helper: show all filter button (no filter implemented - placeholder) */
+document.getElementById("show-all").addEventListener("click", ()=>{
+  // placeholder: could add filters (aprobadas, desbloqueadas...)
+  alert("Mostrar todos (por ahora ya se muestran todos los semestres).");
+});
+</script>
+
+</body>
+</html>
