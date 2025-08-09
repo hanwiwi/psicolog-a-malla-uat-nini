@@ -1,38 +1,335 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MALLA CURRICULAR PSICOLOGÍA UAT</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Malla Psicología UAT — @Nini (vista previa)</title>
+<style>
+  :root{
+    --bg:#f4f7fb;
+    --panel:#ffffff;
+    --muted:#91a0b3;
+    --accent:#c3cdd6; /* gris azulado suave */
+    --card:#e9eef4;
+    --card-checked:#c8cfd6;
+    --text:#222;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:var(--bg);
+    color:var(--text);
+    padding:24px;
+  }
+  header{
+    text-align:center;
+    margin-bottom:18px;
+  }
+  header h1{
+    margin:0;
+    font-size:20px;
+    letter-spacing:1px;
+  }
+  header p{margin:6px 0 0;color:var(--muted)}
+  #controls{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    align-items:center;
+    margin-top:14px;
+    flex-wrap:wrap;
+  }
+  .counter{
+    background:var(--panel);
+    border-radius:10px;
+    padding:10px 14px;
+    box-shadow:0 4px 18px rgba(0,0,0,0.04);
+    font-weight:600;
+  }
+  main{
+    max-width:1100px;
+    margin:20px auto 80px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    padding:0 12px;
+  }
+  .semester{
+    background:var(--panel);
+    border-left:6px solid var(--accent);
+    border-radius:10px;
+    padding:14px;
+    box-shadow:0 6px 20px rgba(16,24,40,0.04);
+  }
+  .semester h2{
+    margin:0 0 8px;
+    text-transform:uppercase;
+    font-size:15px;
+    letter-spacing:0.6px;
+  }
+  .sem-info{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-bottom:8px;
+    color:var(--muted);
+    font-size:13px;
+  }
+  .subjects{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:8px;
+  }
+  @media(min-width:880px){
+    .subjects{
+      grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+  }
+  .card{
+    background:var(--card);
+    border-radius:8px;
+    padding:10px 12px;
+    display:flex;
+    gap:12px;
+    align-items:center;
+    justify-content:space-between;
+    border:1px solid rgba(0,0,0,0.03);
+    transition:transform .14s, background .14s, box-shadow .14s;
+    cursor:pointer;
+  }
+  .card:hover{ transform:translateY(-3px); box-shadow:0 8px 18px rgba(2,6,23,0.06) }
+  .card.locked{ opacity:0.45; cursor:not-allowed; transform:none; box-shadow:none; }
+  .card.checked{ background:var(--card-checked); text-decoration:line-through; color:#444 }
+  .card-left{display:flex; gap:12px; align-items:center; flex:1}
+  .code{
+    min-width:40px;
+    height:40px;
+    border-radius:8px;
+    background:linear-gradient(180deg,rgba(0,0,0,0.03),transparent);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; color:var(--muted); font-size:12px;
+  }
+  .meta{
+    display:flex; flex-direction:column;
+  }
+  .name{ font-weight:600; font-size:14px }
+  .credits{ font-size:12px; color:var(--muted); margin-top:4px }
+  .actions{ display:flex; gap:8px; align-items:center }
+  .btn{
+    background:transparent;
+    border:1px solid #9aa8b6;
+    padding:6px 8px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:13px; color:#fff;
+    background:var(--muted);
+  }
+  .btn.small{ padding:4px 6px; font-size:12px }
+  .opt-group{ margin-top:8px; display:flex; gap:8px; flex-wrap:wrap }
+  .opt{
+    background:#fff; border-radius:8px; padding:6px 8px; border:1px solid #d6dfe8; font-size:13px; cursor:pointer;
+  }
+  .opt.selected{ background:var(--muted); color:white; border-color:transparent }
+  footer{ text-align:center; margin-top:18px; color:var(--muted) }
+  .per-sem-credits{ font-weight:700; color:var(--text) }
+  .small-muted{ font-size:12px; color:var(--muted) }
+  .topbar{
+    display:flex; justify-content:space-between; align-items:center; gap:12px; max-width:1100px; margin:0 auto;
+  }
+  .instructions{ font-size:13px; color:var(--muted) }
+</style>
 </head>
 <body>
-    <h1>@NINI - MALLA CURRICULAR PSICOLOGÍA UAT</h1>
-    <div id="creditCounter">Créditos Aprobados: 0</div>
-    <div class="semesters">
-        <!-- Aquí irán los 9 semestres -->
-        <div class="semester" id="sem1">
-            <h2>SEMESTRE I</h2>
-            <div class="course" data-credits="4">Procesos Mentales</div>
-            <div class="course" data-credits="5">Psicología de la Niñez y la Adolescencia</div>
-            <div class="course" data-credits="5">Bases Biológicas del Comportamiento</div>
-            <div class="course" data-credits="4">Psicología Social y Ambiental</div>
-            <div class="course" data-credits="5">Fundamentos de la Psicomedición</div>
-            <div class="course" data-credits="4">Teorías y Sistemas Clásicos en Psicología</div>
-            <div class="course" data-credits="4">Epistemología</div>
-            <div class="course" data-credits="4">Competencias Digitales en Psicología</div>
-            <div class="course" data-credits="3">Habilita – Emocional</div>
-        </div>
-        <div class="semester" id="sem2"><h2>SEMESTRE II</h2></div>
-        <div class="semester" id="sem3"><h2>SEMESTRE III</h2></div>
-        <div class="semester" id="sem4"><h2>SEMESTRE IV</h2></div>
-        <div class="semester" id="sem5"><h2>SEMESTRE V</h2></div>
-        <div class="semester" id="sem6"><h2>SEMESTRE VI</h2></div>
-        <div class="semester" id="sem7"><h2>SEMESTRE VII</h2></div>
-        <div class="semester" id="sem8"><h2>SEMESTRE VIII</h2></div>
-        <div class="semester" id="sem9"><h2>SEMESTRE IX</h2></div>
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+
+<header>
+  <h1>MALLA CURRICULAR PSICOLOGÍA UAT</h1>
+  <p>@Nini — interactiva • vertical • monócromo</p>
+  <div id="controls" class="topbar" style="margin-top:12px;">
+    <div class="counter">Total aprobados: <span id="total-counter">0</span> créditos</div>
+    <div class="instructions">Haz clic en una materia para aprobarla. Si una materia tiene requisito, aparece bloqueada hasta cumplirlo.</div>
+    <div class="counter">Mostrar: <span id="filter-info">todos</span></div>
+  </div>
+</header>
+
+<main id="main"></main>
+
+<footer>
+  <p class="small-muted">Guardado automático en el navegador • Firma: @Nini</p>
+</footer>
+
+<script>
+/* ===========================
+   Datos completos: semestres I a IX
+   - id: identificador único (sin tildes para facilidad)
+   - req: array de ids que son requisitos
+   - opciones: array de strings (para optativas / habilita)
+   =========================== */
+const DATA = [
+  {sem:1, id:"procesos_mentales", name:"PROCESOS MENTALES", credits:4},
+  {sem:1, id:"psicologia_ninez_adolescencia", name:"PSICOLOGIA DE LA NIÑEZ Y LA ADOLESCENCIA", credits:5},
+  {sem:1, id:"bases_biologicas", name:"BASES BIOLOGICAS DEL COMPORTAMIENTO", credits:5},
+  {sem:1, id:"psicologia_social", name:"PSICOLOGIA SOCIAL Y AMBIENTAL", credits:4},
+  {sem:1, id:"fundamentos_psicomedicion", name:"FUNDAMENTOS DE LA PSICOMEDICION", credits:5},
+  {sem:1, id:"teorias_sistemas_clasicos", name:"TEORIAS Y SISTEMAS CLASICOS EN PSICOLOGIA", credits:4},
+  {sem:1, id:"epistemologia", name:"EPISTEMOLOGIA", credits:4},
+  {sem:1, id:"competencias_digitales", name:"COMPETENCIAS DIGITALES EN PSICOLOGIA", credits:4},
+  {sem:1, id:"habilita_emocional", name:"HABILITA – EMOCIONAL", credits:3, opciones:["CALIDAD DE VIDA Y BIENESTAR","EDUCACIÓN EMOCIONAL INTEGRAL","TALLER DE HABILIDADES SOCIOEMOCIONALES"]},
+
+  {sem:2, id:"teorias_sistemas_contemporaneos", name:"TEORIAS Y SISTEMAS CONTEMPORANEOS EN PSICOLOGIA", credits:4},
+  {sem:2, id:"fundamentos_entrevista", name:"FUNDAMENTOS DE LA ENTREVISTA", credits:5},
+  {sem:2, id:"estadistica_descriptiva", name:"ESTADISTICA DESCRIPTIVA", credits:5},
+  {sem:2, id:"psicologia_adultez", name:"PSICOLOGIA DE LA ADULTEZ", credits:4},
+  {sem:2, id:"psicofisiologia", name:"PSICOFISIOLOGIA", credits:5},
+  {sem:2, id:"teorias_personalidad", name:"TEORIAS DE LA PERSONALIDAD", credits:4},
+  {sem:2, id:"psicologia_organizacional", name:"PSICOLOGIA ORGANIZACIONAL", credits:4},
+  {sem:2, id:"psicologia_educativa", name:"PSICOLOGIA EDUCATIVA", credits:4},
+  {sem:2, id:"habilita_comunicativa", name:"HABILITA – COMUNICATIVA", credits:3, opciones:["COMPETENCIA COMUNICATIVA Y MUNDO CONTEMPORANEO","COMUNICACION ASERTIVA","COMUNICACION DE LA CIENCIA"]},
+
+  {sem:3, id:"estadistica_inferencial", name:"ESTADISTICA INFERENCIAL", credits:4},
+  {sem:3, id:"neuropsicologia", name:"NEUROPSICOLOGIA", credits:4},
+  {sem:3, id:"tecnicas_entrevista", name:"TECNICAS DE LA ENTREVISTA", credits:4, req:["fundamentos_entrevista"]},
+  {sem:3, id:"teoria_psicoanalitica", name:"TEORIA PSICONANALITICA", credits:4},
+  {sem:3, id:"trastornos_desarrollo", name:"TRASTORNOS DEL DESARROLLO", credits:5},
+  {sem:3, id:"evaluacion_psicologica_educativa", name:"EVALUACION PSICOLOGICA EDUCATIVA", credits:6},
+  {sem:3, id:"intervencion_ambito_educativo", name:"INTERVENCION EN EL AMBITO EDUCATIVO", credits:4},
+  {sem:3, id:"psicologia_clinica", name:"PSICOLOGIA CLINICA", credits:4},
+  {sem:3, id:"habilita_conciencia_social", name:"HABILITA – CONCIENCIA SOCIAL", credits:3, opciones:["EMPRENDIMIENTO EN ACCION","EMPRENDIMIENTO EN ACCION Y CONCIENCIA SOCIAL","HUMANISMO, SOCIEDAD E INDIVIDUO","PENSAMIENTO CRITICO"]},
+
+  {sem:4, id:"competencias_digitales_metodologia", name:"COMPETENCIAS DIGITALES EN LA METODOLOGIA DE LA INVESTIGACION", credits:4},
+  {sem:4, id:"psicopatologia_i", name:"PSICOPATOLOGIA I", credits:5},
+  {sem:4, id:"analisis_conducta_aplicada", name:"ANALISIS DE LA CONDUCTA APLICADA", credits:3},
+  {sem:4, id:"codigo_etico", name:"CODIGO ETICO", credits:4},
+  {sem:4, id:"evaluacion_neuropsicologica", name:"EVALUACION NEUROPSICOLOGICA Y EDUCACION ESPECIAL", credits:6},
+  {sem:4, id:"intervencion_lenguaje_habla", name:"INTERVENCION DEL LENGUAJE Y HABLA", credits:4},
+  {sem:4, id:"intervencion_neuropsicologica", name:"INTERVENCION NEUROPSICOLOGICA Y EDUCACION ESPECIAL", credits:5},
+  {sem:4, id:"electiva_i", name:"ELECTIVA DISCIPLINAR/PROFESIONAL I", credits:4, opciones:["DINAMICA DE GRUPOS","HIGIENE MENTAL Y PSICOFARMACOLOGIA","MODELOS EDUCATIVOS CONTEMPORANEOS","TALLER DE AUTOCONOCIMIENTO","TALLER DE EMPRENDIMIENTO EN PSICOLOGIA","TALLER DE INTERVENCION FAMILIAR Y DE PAREJA"]},
+  {sem:4, id:"habilita_inteligencia_contextual", name:"HABILITA – INTELIGENCIA CONTEXTUAL", credits:3, opciones:["DIRECCION Y ESTILOS DE LIDERAZGO","INTELIGENCIA CONTEXTUAL","INTELIGENCIA, ADAPTACION E INNOVACION","PENSAMIENTO CRITICO PARA LA SOLUCION DE PROBLEMAS"]},
+
+  {sem:5, id:"psicopatologia_ii", name:"PSICOPATOLOGIA II", credits:5, req:["psicopatologia_i"]},
+  {sem:5, id:"corrientes_psicoanaliticas", name:"CORRIENTES PSICOANALITICAS", credits:4, req:["teoria_psicoanalitica"]},
+  {sem:5, id:"evaluacion_psicologica_laboral", name:"EVALUACION PSICOLOGICA LABORAL", credits:5},
+  {sem:5, id:"modificacion_conducta", name:"MODIFICACION DE LA CONDUCTA HUMANA", credits:4, req:["analisis_conducta_aplicada"]},
+  {sem:5, id:"electiva_ii", name:"ELECTIVA DISCIPLINAR/PROFESIONAL II", credits:4, opciones:["ACOSO ESCOLAR","INTERVENCION EN CRISIS","PSICOLOGIA DE LA VIOLENCIA","PSICOLOGIA EXPERIMENTAL","PSICOTERAPIA GRUPAL","TALLER DE PERITAJES EN PSICOLOGIA"]},
+  {sem:5, id:"practicas_pre_i", name:"PRACTICAS PRE-PROFESIONALES I", credits:5},
+  {sem:5, id:"metodologia_i", name:"METODOLOGIA DE LA INVESTIGACION I", credits:4},
+  {sem:5, id:"habilita_educacion_sostenible", name:"HABILITA – EDUCACION PARA EL DESARROLLO SOSTENIBLE", credits:3, opciones:["EQUIDAD DE GENERO","FORMACION EN RESPONSABILIDAD SOCIAL UNIVERSITARIA","RESPONSABILIDAD SOCIAL EN PSICOLOGIA","SOSTENIBILIDAD Y RESPONSABILIDAD SOCIAL"]},
+
+  {sem:6, id:"evaluacion_clinica_nna", name:"EVALUACION PSICOLOGICA CLINICA EN NINOS Y ADOLESCENTES", credits:6},
+  {sem:6, id:"intervencion_organizacional", name:"INTERVENCION EN EL AMBITO ORGANIZACIONAL", credits:3},
+  {sem:6, id:"intervencion_psicodinamica", name:"INTERVENCION PSICODINAMICA", credits:4},
+  {sem:6, id:"psicologia_humanista", name:"PSICOLOGIA HUMANISTA", credits:4, req:[]},
+  {sem:6, id:"reclutamiento_seleccion", name:"RECLUTAMIENTO, SELECCION Y CAPACITACION", credits:4},
+  {sem:6, id:"electiva_iii", name:"ELECTIVA DISCIPLINAR/PROFESIONAL III", credits:4, opciones:["CONSULTORIA Y ASESORIA EN RECURSOS HUMANOS","INTERVENCION EN CRISIS","PSICOTERAPIA DE FAMILIA Y PAREJA","TALLER DE INTERVENCION DE GRUPOS","TALLER DE MEDIACION","TERAPIA FAMILIAR SISTEMICA"]},
+  {sem:6, id:"practicas_pre_ii", name:"PRACTICAS PRE-PROFESIONALES II", credits:5},
+  {sem:6, id:"metodologia_ii", name:"METODOLOGIA DE LA INVESTIGACION II", credits:4, req:["metodologia_i"]},
+
+  {sem:7, id:"ingles_comprension_textos", name:"COMPRENSION DE TEXTOS EN INGLES", credits:4},
+  {sem:7, id:"evaluacion_clinica_adultos", name:"EVALUACION PSICOLOGICA CLINICA EN ADULTOS", credits:5},
+  {sem:7, id:"intervencion_cognitivo_conductual", name:"INTERVENCION COGNITIVO CONDUCTUAL", credits:4},
+  {sem:7, id:"psicoterapia_humanista_nna", name:"PSICOTERAPIA HUMANISTA EN NINOS Y ADOLESCENTES", credits:4, req:["psicologia_humanista"]},
+  {sem:7, id:"trastornos_aprendizaje", name:"TRASTORNOS ESPECIFICOS DEL APRENDIZAJE", credits:4},
+  {sem:7, id:"electiva_iv", name:"ELECTIVA DISCIPLINAR/PROFESIONAL IV", credits:4, opciones:["CUIDADOS PALIATIVOS Y TANATOLOGIA","PSICOFARMACOLOGIA","PSICOLOGIA BASADA EN EVIDENCIAS","SALUD OCUPACIONAL","TALLER DE TANATOLOGIA","TALLER DE TEMAS EMERGENTES"]},
+  {sem:7, id:"practicas_pre_iii", name:"PRACTICAS PRE-PROFESIONALES III", credits:5},
+  {sem:7, id:"seminario_i", name:"SEMINARIO DE INVESTIGACION I", credits:4, req:["metodologia_ii"]},
+
+  {sem:8, id:"ingles_redaccion_textos", name:"REDACCION DE TEXTOS EN INGLES", credits:4},
+  {sem:8, id:"proyectos_comunitarios", name:"ELABORACION DE PROYECTOS COMUNITARIOS", credits:4},
+  {sem:8, id:"orientacion_vocacional", name:"INTERVENCION EN ORIENTACION VOCACIONAL", credits:4},
+  {sem:8, id:"psicologia_salud_deporte", name:"PSICOLOGIA DE LA SALUD Y EL DEPORTE", credits:4},
+  {sem:8, id:"psicologia_juridica", name:"PSICOLOGIA JURIDICA Y FORENSE", credits:4},
+  {sem:8, id:"psicoterapia_humanista_adultos", name:"PSICOTERAPIA HUMANISTA EN ADULTOS", credits:4, req:["psicologia_humanista"]},
+  {sem:8, id:"practica_profesional_supervision", name:"PRACTICA PROFESIONAL: SUPERVISION DE CASOS CLINICOS Y EDUCATIVOS", credits:5},
+  {sem:8, id:"seminario_ii", name:"SEMINARIO DE INVESTIGACION II", credits:5, req:["seminario_i"]},
+
+  {sem:9, id:"sexualidad_humana", name:"SEXUALIDAD HUMANA", credits:5},
+  {sem:9, id:"gestion_administrativa", name:"GESTION ADMINISTRATIVA Y LEGAL DEL CAPITAL HUMANO", credits:4},
+  {sem:9, id:"intervencion_estim_tematica", name:"INTERVENCION EN ESTIMULACION TEMPRANA", credits:4},
+  {sem:9, id:"intervencion_adulto_mayor", name:"INTERVENCION PSICOLOGICA DEL ADULTO MAYOR", credits:5},
+  {sem:9, id:"servicio_social", name:"SERVICIO SOCIAL", credits:10},
+  {sem:9, id:"presentacion_proyecto_final", name:"PRESENTACION DEL PROYECTO FINAL", credits:5}
+];
+
+/* ---------- Estado en localStorage ----------
+   - approved: Set of ids approved (true)
+   - selectedOptions: map id -> selected option text (for optativas/habilita)
+*/
+const LS_KEY_APPROVED = "malla_approved_v2";
+const LS_KEY_OPTIONS = "malla_options_v2";
+
+/* Utility */
+function bySem(sem){
+  return DATA.filter(d => d.sem===sem);
+}
+function getApprovedSet(){
+  try{
+    return new Set(JSON.parse(localStorage.getItem(LS_KEY_APPROVED) || "[]"));
+  }catch(e){ return new Set() }
+}
+function saveApprovedSet(set){
+  localStorage.setItem(LS_KEY_APPROVED, JSON.stringify([...set]));
+}
+function getOptionsMap(){
+  try{
+    return JSON.parse(localStorage.getItem(LS_KEY_OPTIONS) || "{}");
+  }catch(e){ return {} }
+}
+function saveOptionsMap(m){
+  localStorage.setItem(LS_KEY_OPTIONS, JSON.stringify(m));
+}
+
+/* Compute whether a subject is unlocked: all its req ids are in approved */
+function isUnlocked(subject, approvedSet){
+  if(!subject.req || subject.req.length===0) return true;
+  return subject.req.every(rid => approvedSet.has(rid));
+}
+
+/* Recalculate per-semester and total credits */
+function calculateCredits(approvedSet){
+  const perSem = {};
+  let total = 0;
+  DATA.forEach(item=>{
+    if(approvedSet.has(item.id)){
+      perSem[item.sem] = (perSem[item.sem]||0) + item.credits;
+      total += item.credits;
+    }
+  });
+  return {perSem, total};
+}
+
+/* Rendering */
+function render(){
+  const main = document.getElementById("main");
+  main.innerHTML = ""; // clear
+  const approved = getApprovedSet();
+  const options = getOptionsMap();
+
+  // Header totals
+  const totals = calculateCredits(approved);
+  document.getElementById("total-counter").textContent = totals.total;
+
+  for(let s=1; s<=9; s++){
+    const semBlock = document.createElement("section");
+    semBlock.className = "semester";
+    const semTitle = document.createElement("h2");
+    semTitle.textContent = `SEMESTRE ${s}`;
+    semBlock.appendChild(semTitle);
+
+    // info row
+    const infoRow = document.createElement("div");
+    infoRow.className = "sem-info";
+    const per = totals.perSem[s] || 0;
+    infoRow.innerHTML = `<div class="small-muted">Créditos semestre: <span class="per-sem-credits">${per}</span></div>
+                         <div class="small-muted">Materias: ${bySem(s).length}</div>`;
+    semBlock.appendChild(infoRow);
+
+    // subjects grid
+    const subjectsGrid = document.createElement("div");
+    subjectsGrid.className = "subjects";
+
+    bySem(s).forEach(item=>{
+      const card = document.createElement("div");
+      card.className = "card";
+      // locked?
+      const unlocked = isUnlocked(item, approved);
