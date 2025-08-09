@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Malla Psicología UAT — @Nini (compacto, vertical)</title>
+<title>Malla Psicología UAT — @Nini (3 columnas)</title>
 <style>
   :root{
     --bg:#ffffff;
@@ -16,6 +16,8 @@
     --shadow: rgba(6,10,15,0.04);
     --opt-bg:#ffffff;
     --opt-border:#ececec;
+    --gap:14px;
+    --font-size:15px; /* ligeramente más grande */
   }
   *{box-sizing:border-box}
   body{
@@ -23,62 +25,84 @@
     font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
     background:var(--bg);
     color:var(--text);
-    padding:18px;
+    padding:20px;
     -webkit-font-smoothing:antialiased;
-    font-size:13px;
+    font-size:var(--font-size);
+    line-height:1.25;
   }
 
-  header{max-width:1100px;margin:0 auto 10px;text-align:center}
-  header h1{margin:0;font-size:18px}
-  header p{margin:6px 0 0;color:var(--muted);font-size:12px}
+  header{max-width:1300px;margin:0 auto 12px;text-align:center}
+  header h1{margin:0;font-size:20px}
+  header p{margin:6px 0 0;color:var(--muted);font-size:14px}
 
-  .top{max-width:1100px;margin:12px auto 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between}
-  .counter{background:var(--panel);padding:8px 10px;border-radius:8px;border:1px solid var(--border);font-weight:700;box-shadow:0 8px 18px var(--shadow);font-size:13px}
+  .top{max-width:1300px;margin:12px auto 18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+  .counter{background:var(--panel);padding:10px 12px;border-radius:9px;border:1px solid var(--border);font-weight:700;box-shadow:0 8px 18px var(--shadow)}
   .controls{display:flex;gap:8px;align-items:center}
-  .btn{background:transparent;border:1px solid var(--border);padding:7px 10px;border-radius:8px;cursor:pointer;color:var(--text);font-weight:600;font-size:12px}
+  .btn{background:transparent;border:1px solid var(--border);padding:8px 10px;border-radius:9px;cursor:pointer;color:var(--text);font-weight:600}
   .btn.primary{background:var(--text);color:#fff;border:0}
-  .instructions{color:var(--muted);font-size:12px;flex:1;text-align:right}
+  .instructions{color:var(--muted);font-size:13px;flex:1;text-align:right}
 
-  main{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:12px;padding:0 6px}
+  /* Grid de 3 columnas */
+  .grid{
+    max-width:1300px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:var(--gap);
+    align-items:start;
+  }
+
+  /* Cada columna tendrá semestres apilados */
+  .col{display:flex;flex-direction:column;gap:12px}
 
   .semester{background:var(--panel);border-radius:10px;padding:12px;border:1px solid var(--border);box-shadow:0 10px 22px var(--shadow)}
-  .semester h2{margin:0 0 6px;text-transform:uppercase;font-size:13px}
-  .sem-info{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:12px;margin-bottom:8px}
+  .semester h2{margin:0 0 6px;text-transform:uppercase;font-size:14px}
+  .sem-info{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:13px;margin-bottom:8px}
 
   .subjects{display:flex;flex-direction:column;gap:8px}
 
   /* COMPACT CARD */
-  .card{background:var(--card);border-radius:8px;padding:8px;display:flex;gap:8px;border:1px solid var(--border);align-items:center;transition:transform .12s;cursor:pointer}
+  .card{background:var(--card);border-radius:8px;padding:8px;display:flex;gap:10px;border:1px solid var(--border);align-items:center;transition:transform .12s;cursor:pointer}
   .card:hover{transform:translateY(-2px)}
   .card.locked{opacity:0.45;cursor:not-allowed;transform:none}
   .card.checked{background:var(--card-checked);text-decoration:line-through;color:var(--text)}
 
-  .left{display:flex;gap:8px;align-items:center;flex:1;min-width:0}
-  .badge{min-width:36px;height:36px;border-radius:8px;background:linear-gradient(180deg,rgba(0,0,0,0.03),transparent);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--muted);font-size:12px;padding:6px;flex-shrink:0}
+  .left{display:flex;gap:10px;align-items:center;flex:1;min-width:0}
+  .badge{min-width:40px;height:40px;border-radius:8px;background:linear-gradient(180deg,rgba(0,0,0,0.03),transparent);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--muted);font-size:13px;padding:6px;flex-shrink:0}
   .meta{display:flex;flex-direction:column;min-width:0}
-  .name{font-weight:800;font-size:13px;line-height:1.05;overflow:hidden;text-overflow:ellipsis}
-  .credits{font-size:12px;color:var(--muted);margin-top:4px}
+  .name{font-weight:800;font-size:15px;line-height:1.05;overflow:hidden;text-overflow:ellipsis}
+  .credits{font-size:13px;color:var(--muted);margin-top:6px}
 
   .actions{display:flex;flex-direction:column;gap:6px;align-items:flex-end;flex-shrink:0}
-  .approve{background:var(--text);color:white;border:0;padding:6px 10px;border-radius:8px;cursor:pointer;font-weight:700;font-size:12px}
-  .approve.small{padding:5px 8px;font-size:12px}
+  .approve{background:var(--text);color:white;border:0;padding:7px 12px;border-radius:8px;cursor:pointer;font-weight:800;font-size:13px}
+  .approve.small{padding:6px 10px;font-size:13px}
 
-  /* optativas compactas: vertical, pero más pequeñas */
+  /* optativas compactas: vertical */
   .opt-block{background:var(--opt-bg);border:1px solid var(--opt-border);padding:6px;border-radius:8px;margin-top:6px;width:100%}
   .opt-group{display:flex;flex-direction:column;gap:6px}
-  .opt{background:#fff;border-radius:6px;padding:6px 8px;border:1px solid var(--opt-border);font-size:12px;cursor:pointer;color:var(--text);text-align:left;width:100%}
+  .opt{background:#fff;border-radius:6px;padding:7px 9px;border:1px solid var(--opt-border);font-size:14px;cursor:pointer;color:var(--text);text-align:left;width:100%}
   .opt.selected{background:var(--text);color:#fff;border-color:transparent}
 
-  footer{text-align:center;margin-top:12px;color:var(--muted);font-size:12px}
-  .reset{background:transparent;border:1px solid var(--border);padding:6px 10px;border-radius:8px;cursor:pointer}
-  @media(max-width:820px){ .instructions{display:block;text-align:left;width:100%;margin-top:8px} .actions{align-items:flex-start} }
+  footer{text-align:center;margin-top:16px;color:var(--muted);font-size:13px}
+  .reset{background:transparent;border:1px solid var(--border);padding:7px 10px;border-radius:8px;cursor:pointer}
+
+  /* Responsive: 2 columnas y luego 1 */
+  @media(max-width:1100px){
+    .grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:720px){
+    :root{--font-size:14px}
+    .grid{grid-template-columns:1fr}
+    .instructions{display:block;text-align:left;width:100%;margin-top:8px}
+    .actions{align-items:flex-start}
+  }
 </style>
 </head>
 <body>
 
 <header>
   <h1>MALLA CURRICULAR PSICOLOGÍA UAT</h1>
-  <p>@Nini • monocromo • compacto • vertical</p>
+  <p>@Nini • monocromo • 3 columnas • texto aumentado</p>
 </header>
 
 <div class="top" role="region" aria-label="Controles">
@@ -87,416 +111,426 @@
     <button class="btn" id="show-all">Mostrar: todos</button>
     <button class="btn reset" id="reset">Reset progreso</button>
   </div>
-  <div class="instructions">Tarjetas más compactas. Clic para aprobar/desaprobar. Las seriadas se desbloquean al cumplir requisitos.</div>
+  <div class="instructions">Haz clic en la tarjeta o en "Aprobar". Las materias seriadas estarán bloqueadas hasta cumplir requisitos. Elige optativas antes de aprobar si corresponde.</div>
 </div>
 
-<main id="main">
+<!-- GRID PRINCIPAL: 3 COLUMNAS -->
+<div class="grid">
 
-  <!-- SEMESTRE I -->
-  <section class="semester" data-sem="1">
-    <h2>SEMESTRE I</h2>
-    <div class="sem-info">
-      <div class="small-muted">Créditos semestre: <span class="per-sem-credits" data-sem="1">0</span></div>
-      <div class="small-muted">Materias: 9</div>
-    </div>
-    <div class="subjects">
-      <article class="card" data-id="procesos_mentales" data-credits="4"><div class="left"><div class="badge">P</div><div class="meta"><div class="name">PROCESOS MENTALES</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+  <!-- COLUMNA 1: Semestres 1-3 -->
+  <div class="col">
+    <!-- SEMESTRE I -->
+    <section class="semester" data-sem="1">
+      <h2>SEMESTRE I</h2>
+      <div class="sem-info">
+        <div class="small-muted">Créditos semestre: <span class="per-sem-credits" data-sem="1">0</span></div>
+        <div class="small-muted">Materias: 9</div>
+      </div>
+      <div class="subjects">
+        <article class="card" data-id="procesos_mentales" data-credits="4"><div class="left"><div class="badge">P</div><div class="meta"><div class="name">PROCESOS MENTALES</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="psicologia_ninez_adolescencia" data-credits="5"><div class="left"><div class="badge">PN</div><div class="meta"><div class="name">PSICOLOGIA DE LA NIÑEZ Y LA ADOLESCENCIA</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="psicologia_ninez_adolescencia" data-credits="5"><div class="left"><div class="badge">PN</div><div class="meta"><div class="name">PSICOLOGIA DE LA NIÑEZ Y LA ADOLESCENCIA</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="bases_biologicas" data-credits="5"><div class="left"><div class="badge">B</div><div class="meta"><div class="name">BASES BIOLOGICAS DEL COMPORTAMIENTO</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="bases_biologicas" data-credits="5"><div class="left"><div class="badge">B</div><div class="meta"><div class="name">BASES BIOLOGICAS DEL COMPORTAMIENTO</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="psicologia_social" data-credits="4"><div class="left"><div class="badge">S</div><div class="meta"><div class="name">PSICOLOGIA SOCIAL Y AMBIENTAL</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="psicologia_social" data-credits="4"><div class="left"><div class="badge">S</div><div class="meta"><div class="name">PSICOLOGIA SOCIAL Y AMBIENTAL</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="fundamentos_psicomedicion" data-credits="5"><div class="left"><div class="badge">FP</div><div class="meta"><div class="name">FUNDAMENTOS DE LA PSICOMEDICION</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="fundamentos_psicomedicion" data-credits="5"><div class="left"><div class="badge">FP</div><div class="meta"><div class="name">FUNDAMENTOS DE LA PSICOMEDICION</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="teorias_sistemas_clasicos" data-credits="4"><div class="left"><div class="badge">TC</div><div class="meta"><div class="name">TEORIAS Y SISTEMAS CLASICOS EN PSICOLOGIA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="teorias_sistemas_clasicos" data-credits="4"><div class="left"><div class="badge">TC</div><div class="meta"><div class="name">TEORIAS Y SISTEMAS CLASICOS EN PSICOLOGIA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="epistemologia" data-credits="4"><div class="left"><div class="badge">E</div><div class="meta"><div class="name">EPISTEMOLOGIA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="epistemologia" data-credits="4"><div class="left"><div class="badge">E</div><div class="meta"><div class="name">EPISTEMOLOGIA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="competencias_digitales" data-credits="4"><div class="left"><div class="badge">CD</div><div class="meta"><div class="name">COMPETENCIAS DIGITALES EN PSICOLOGIA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="competencias_digitales" data-credits="4"><div class="left"><div class="badge">CD</div><div class="meta"><div class="name">COMPETENCIAS DIGITALES EN PSICOLOGIA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="habilita_emocional" data-credits="3">
-        <div class="left">
-          <div class="badge">HE</div>
-          <div class="meta">
-            <div class="name">HABILITA – EMOCIONAL</div>
-            <div class="credits">3 créditos</div>
-            <div class="opt-block" aria-label="Opciones Habilita Emocional">
-              <div class="opt-group">
-                <button class="opt" data-opt="CALIDAD DE VIDA Y BIENESTAR">CALIDAD DE VIDA Y BIENESTAR</button>
-                <button class="opt" data-opt="EDUCACIÓN EMOCIONAL INTEGRAL">EDUCACIÓN EMOCIONAL INTEGRAL</button>
-                <button class="opt" data-opt="TALLER DE HABILIDADES SOCIOEMOCIONALES">TALLER DE HABILIDADES SOCIOEMOCIONALES</button>
+        <article class="card" data-id="habilita_emocional" data-credits="3">
+          <div class="left">
+            <div class="badge">HE</div>
+            <div class="meta">
+              <div class="name">HABILITA – EMOCIONAL</div>
+              <div class="credits">3 créditos</div>
+              <div class="opt-block" aria-label="Opciones Habilita Emocional">
+                <div class="opt-group">
+                  <button class="opt" data-opt="CALIDAD DE VIDA Y BIENESTAR">CALIDAD DE VIDA Y BIENESTAR</button>
+                  <button class="opt" data-opt="EDUCACIÓN EMOCIONAL INTEGRAL">EDUCACIÓN EMOCIONAL INTEGRAL</button>
+                  <button class="opt" data-opt="TALLER DE HABILIDADES SOCIOEMOCIONALES">TALLER DE HABILIDADES SOCIOEMOCIONALES</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="actions"><button class="approve small">Aprobar</button></div>
-      </article>
-    </div>
-  </section>
+          <div class="actions"><button class="approve small">Aprobar</button></div>
+        </article>
+      </div>
+    </section>
 
-  <!-- SEMESTRE II -->
-  <section class="semester" data-sem="2">
-    <h2>SEMESTRE II</h2>
-    <div class="sem-info">
-      <div class="small-muted">Créditos semestre: <span class="per-sem-credits" data-sem="2">0</span></div>
-      <div class="small-muted">Materias: 9</div>
-    </div>
-    <div class="subjects">
-      <article class="card" data-id="teorias_sistemas_contemporaneos" data-credits="4"><div class="left"><div class="badge">TC</div><div class="meta"><div class="name">TEORIAS Y SISTEMAS CONTEMPORANEOS EN PSICOLOGIA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+    <!-- SEMESTRE II -->
+    <section class="semester" data-sem="2">
+      <h2>SEMESTRE II</h2>
+      <div class="sem-info">
+        <div class="small-muted">Créditos semestre: <span class="per-sem-credits" data-sem="2">0</span></div>
+        <div class="small-muted">Materias: 9</div>
+      </div>
+      <div class="subjects">
+        <article class="card" data-id="teorias_sistemas_contemporaneos" data-credits="4"><div class="left"><div class="badge">TC</div><div class="meta"><div class="name">TEORIAS Y SISTEMAS CONTEMPORANEOS EN PSICOLOGIA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="fundamentos_entrevista" data-credits="5"><div class="left"><div class="badge">FE</div><div class="meta"><div class="name">FUNDAMENTOS DE LA ENTREVISTA</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="fundamentos_entrevista" data-credits="5"><div class="left"><div class="badge">FE</div><div class="meta"><div class="name">FUNDAMENTOS DE LA ENTREVISTA</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="estadistica_descriptiva" data-credits="5"><div class="left"><div class="badge">ED</div><div class="meta"><div class="name">ESTADISTICA DESCRIPTIVA</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="estadistica_descriptiva" data-credits="5"><div class="left"><div class="badge">ED</div><div class="meta"><div class="name">ESTADISTICA DESCRIPTIVA</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="psicologia_adultez" data-credits="4"><div class="left"><div class="badge">PA</div><div class="meta"><div class="name">PSICOLOGIA DE LA ADULTEZ</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="psicologia_adultez" data-credits="4"><div class="left"><div class="badge">PA</div><div class="meta"><div class="name">PSICOLOGIA DE LA ADULTEZ</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="psicofisiologia" data-credits="5"><div class="left"><div class="badge">PF</div><div class="meta"><div class="name">PSICOFISIOLOGIA</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="psicofisiologia" data-credits="5"><div class="left"><div class="badge">PF</div><div class="meta"><div class="name">PSICOFISIOLOGIA</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="teorias_personalidad" data-credits="4"><div class="left"><div class="badge">TP</div><div class="meta"><div class="name">TEORIAS DE LA PERSONALIDAD</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="teorias_personalidad" data-credits="4"><div class="left"><div class="badge">TP</div><div class="meta"><div class="name">TEORIAS DE LA PERSONALIDAD</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="psicologia_organizacional" data-credits="4"><div class="left"><div class="badge">PO</div><div class="meta"><div class="name">PSICOLOGIA ORGANIZACIONAL</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="psicologia_organizacional" data-credits="4"><div class="left"><div class="badge">PO</div><div class="meta"><div class="name">PSICOLOGIA ORGANIZACIONAL</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="psicologia_educativa" data-credits="4"><div class="left"><div class="badge">PE</div><div class="meta"><div class="name">PSICOLOGIA EDUCATIVA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="psicologia_educativa" data-credits="4"><div class="left"><div class="badge">PE</div><div class="meta"><div class="name">PSICOLOGIA EDUCATIVA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="habilita_comunicativa" data-credits="3">
-        <div class="left">
-          <div class="badge">HC</div>
-          <div class="meta">
-            <div class="name">HABILITA – COMUNICATIVA</div>
-            <div class="credits">3 créditos</div>
-            <div class="opt-block" aria-label="Opciones Habilita Comunicativa">
-              <div class="opt-group">
-                <button class="opt" data-opt="COMPETENCIA COMUNICATIVA Y MUNDO CONTEMPORANEO">COMPETENCIA COMUNICATIVA Y MUNDO CONTEMPORANEO</button>
-                <button class="opt" data-opt="COMUNICACION ASERTIVA">COMUNICACION ASERTIVA</button>
-                <button class="opt" data-opt="COMUNICACION DE LA CIENCIA">COMUNICACION DE LA CIENCIA</button>
+        <article class="card" data-id="habilita_comunicativa" data-credits="3">
+          <div class="left">
+            <div class="badge">HC</div>
+            <div class="meta">
+              <div class="name">HABILITA – COMUNICATIVA</div>
+              <div class="credits">3 créditos</div>
+              <div class="opt-block" aria-label="Opciones Habilita Comunicativa">
+                <div class="opt-group">
+                  <button class="opt" data-opt="COMPETENCIA COMUNICATIVA Y MUNDO CONTEMPORANEO">COMPETENCIA COMUNICATIVA Y MUNDO CONTEMPORANEO</button>
+                  <button class="opt" data-opt="COMUNICACION ASERTIVA">COMUNICACION ASERTIVA</button>
+                  <button class="opt" data-opt="COMUNICACION DE LA CIENCIA">COMUNICACION DE LA CIENCIA</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="actions"><button class="approve small">Aprobar</button></div>
-      </article>
-    </div>
-  </section>
+          <div class="actions"><button class="approve small">Aprobar</button></div>
+        </article>
+      </div>
+    </section>
 
-  <!-- SEMESTRE III -->
-  <section class="semester" data-sem="3">
-    <h2>SEMESTRE III</h2>
-    <div class="sem-info">
-      <div class="small-muted">Créditos semestre: <span class="per-sem-credits" data-sem="3">0</span></div>
-      <div class="small-muted">Materias: 9</div>
-    </div>
-    <div class="subjects">
-      <article class="card" data-id="estadistica_inferencial" data-credits="4"><div class="left"><div class="badge">EI</div><div class="meta"><div class="name">ESTADISTICA INFERENCIAL</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+    <!-- SEMESTRE III -->
+    <section class="semester" data-sem="3">
+      <h2>SEMESTRE III</h2>
+      <div class="sem-info">
+        <div class="small-muted">Créditos semestre: <span class="per-sem-credits" data-sem="3">0</span></div>
+        <div class="small-muted">Materias: 9</div>
+      </div>
+      <div class="subjects">
+        <article class="card" data-id="estadistica_inferencial" data-credits="4"><div class="left"><div class="badge">EI</div><div class="meta"><div class="name">ESTADISTICA INFERENCIAL</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="neuropsicologia" data-credits="4"><div class="left"><div class="badge">N</div><div class="meta"><div class="name">NEUROPSICOLOGIA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="neuropsicologia" data-credits="4"><div class="left"><div class="badge">N</div><div class="meta"><div class="name">NEUROPSICOLOGIA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="tecnicas_entrevista" data-credits="4" data-req="fundamentos_entrevista"><div class="left"><div class="badge">TE</div><div class="meta"><div class="name">TECNICAS DE LA ENTREVISTA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="tecnicas_entrevista" data-credits="4" data-req="fundamentos_entrevista"><div class="left"><div class="badge">TE</div><div class="meta"><div class="name">TECNICAS DE LA ENTREVISTA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="teoria_psicoanalitica" data-credits="4"><div class="left"><div class="badge">TP</div><div class="meta"><div class="name">TEORIA PSICONANALITICA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="teoria_psicoanalitica" data-credits="4"><div class="left"><div class="badge">TP</div><div class="meta"><div class="name">TEORIA PSICONANALITICA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="trastornos_desarrollo" data-credits="5"><div class="left"><div class="badge">TD</div><div class="meta"><div class="name">TRASTORNOS DEL DESARROLLO</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="trastornos_desarrollo" data-credits="5"><div class="left"><div class="badge">TD</div><div class="meta"><div class="name">TRASTORNOS DEL DESARROLLO</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="evaluacion_psicologica_educativa" data-credits="6"><div class="left"><div class="badge">EE</div><div class="meta"><div class="name">EVALUACIÓN PSICOLÓGICA EDUCATIVA</div><div class="credits">6 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="evaluacion_psicologica_educativa" data-credits="6"><div class="left"><div class="badge">EE</div><div class="meta"><div class="name">EVALUACIÓN PSICOLÓGICA EDUCATIVA</div><div class="credits">6 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="intervencion_ambito_educativo" data-credits="4"><div class="left"><div class="badge">IE</div><div class="meta"><div class="name">INTERVENCIÓN EN EL ÁMBITO EDUCATIVO</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="intervencion_ambito_educativo" data-credits="4"><div class="left"><div class="badge">IE</div><div class="meta"><div class="name">INTERVENCIÓN EN EL ÁMBITO EDUCATIVO</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="psicologia_clinica" data-credits="4"><div class="left"><div class="badge">PC</div><div class="meta"><div class="name">PSICOLOGÍA CLÍNICA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="psicologia_clinica" data-credits="4"><div class="left"><div class="badge">PC</div><div class="meta"><div class="name">PSICOLOGÍA CLÍNICA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="habilita_conciencia_social" data-credits="3">
-        <div class="left">
-          <div class="badge">HC</div>
-          <div class="meta">
-            <div class="name">HABILITA – CONCIENCIA SOCIAL</div>
-            <div class="credits">3 créditos</div>
-            <div class="opt-block" aria-label="Opciones Habilita Conciencia Social">
-              <div class="opt-group">
-                <button class="opt" data-opt="EMPRENDIMIENTO EN ACCION">EMPRENDIMIENTO EN ACCION</button>
-                <button class="opt" data-opt="EMPRENDIMIENTO EN ACCION Y CONCIENCIA SOCIAL">EMPRENDIMIENTO EN ACCION Y CONCIENCIA SOCIAL</button>
-                <button class="opt" data-opt="HUMANISMO, SOCIEDAD E INDIVIDUO">HUMANISMO, SOCIEDAD E INDIVIDUO</button>
-                <button class="opt" data-opt="PENSAMIENTO CRITICO">PENSAMIENTO CRITICO</button>
+        <article class="card" data-id="habilita_conciencia_social" data-credits="3">
+          <div class="left">
+            <div class="badge">HC</div>
+            <div class="meta">
+              <div class="name">HABILITA – CONCIENCIA SOCIAL</div>
+              <div class="credits">3 créditos</div>
+              <div class="opt-block" aria-label="Opciones Habilita Conciencia Social">
+                <div class="opt-group">
+                  <button class="opt" data-opt="EMPRENDIMIENTO EN ACCION">EMPRENDIMIENTO EN ACCION</button>
+                  <button class="opt" data-opt="EMPRENDIMIENTO EN ACCION Y CONCIENCIA SOCIAL">EMPRENDIMIENTO EN ACCION Y CONCIENCIA SOCIAL</button>
+                  <button class="opt" data-opt="HUMANISMO, SOCIEDAD E INDIVIDUO">HUMANISMO, SOCIEDAD E INDIVIDUO</button>
+                  <button class="opt" data-opt="PENSAMIENTO CRITICO">PENSAMIENTO CRITICO</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="actions"><button class="approve small">Aprobar</button></div>
-      </article>
-    </div>
-  </section>
+          <div class="actions"><button class="approve small">Aprobar</button></div>
+        </article>
+      </div>
+    </section>
+  </div>
 
-  <!-- SEMESTRE IV -->
-  <section class="semester" data-sem="4">
-    <h2>SEMESTRE IV</h2>
-    <div class="sem-info">
-      <div class="small-muted">Créditos semestre: <span class="per-sem-credits" data-sem="4">0</span></div>
-      <div class="small-muted">Materias: 9</div>
-    </div>
-    <div class="subjects">
-      <article class="card" data-id="competencias_digitales_metodologia" data-credits="4"><div class="left"><div class="badge">CD</div><div class="meta"><div class="name">COMPETENCIAS DIGITALES EN LA METODOLOGÍA DE LA INVESTIGACIÓN</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+  <!-- COLUMNA 2: Semestres 4-6 -->
+  <div class="col">
+    <!-- SEMESTRE IV -->
+    <section class="semester" data-sem="4">
+      <h2>SEMESTRE IV</h2>
+      <div class="sem-info">
+        <div class="small-muted">Créditos semestre: <span class="per-sem-credits" data-sem="4">0</span></div>
+        <div class="small-muted">Materias: 9</div>
+      </div>
+      <div class="subjects">
+        <article class="card" data-id="competencias_digitales_metodologia" data-credits="4"><div class="left"><div class="badge">CD</div><div class="meta"><div class="name">COMPETENCIAS DIGITALES EN LA METODOLOGÍA DE LA INVESTIGACIÓN</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="psicopatologia_i" data-credits="5"><div class="left"><div class="badge">P1</div><div class="meta"><div class="name">PSICOPATOLOGÍA I</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="psicopatologia_i" data-credits="5"><div class="left"><div class="badge">P1</div><div class="meta"><div class="name">PSICOPATOLOGÍA I</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="analisis_conducta_aplicada" data-credits="3"><div class="left"><div class="badge">AC</div><div class="meta"><div class="name">ANÁLISIS DE LA CONDUCTA APLICADA</div><div class="credits">3 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="analisis_conducta_aplicada" data-credits="3"><div class="left"><div class="badge">AC</div><div class="meta"><div class="name">ANÁLISIS DE LA CONDUCTA APLICADA</div><div class="credits">3 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="codigo_etico" data-credits="4"><div class="left"><div class="badge">CE</div><div class="meta"><div class="name">CÓDIGO ÉTICO</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="codigo_etico" data-credits="4"><div class="left"><div class="badge">CE</div><div class="meta"><div class="name">CÓDIGO ÉTICO</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="evaluacion_neuropsicologica" data-credits="6"><div class="left"><div class="badge">EN</div><div class="meta"><div class="name">EVALUACIÓN NEUROPSICOLÓGICA Y EDUCACIÓN ESPECIAL</div><div class="credits">6 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="evaluacion_neuropsicologica" data-credits="6"><div class="left"><div class="badge">EN</div><div class="meta"><div class="name">EVALUACIÓN NEUROPSICOLÓGICA Y EDUCACIÓN ESPECIAL</div><div class="credits">6 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="intervencion_lenguaje_habla" data-credits="4"><div class="left"><div class="badge">IL</div><div class="meta"><div class="name">INTERVENCIÓN DEL LENGUAJE Y HABLA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="intervencion_lenguaje_habla" data-credits="4"><div class="left"><div class="badge">IL</div><div class="meta"><div class="name">INTERVENCIÓN DEL LENGUAJE Y HABLA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="intervencion_neuropsicologica" data-credits="5"><div class="left"><div class="badge">IN</div><div class="meta"><div class="name">INTERVENCIÓN NEUROPSICOLÓGICA Y EDUCACIÓN ESPECIAL</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="intervencion_neuropsicologica" data-credits="5"><div class="left"><div class="badge">IN</div><div class="meta"><div class="name">INTERVENCIÓN NEUROPSICOLÓGICA Y EDUCACIÓN ESPECIAL</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="electiva_i" data-credits="4">
-        <div class="left">
-          <div class="badge">EL1</div>
-          <div class="meta">
-            <div class="name">ELECTIVA DISCIPLINAR/PROFESIONAL I</div>
-            <div class="credits">4 créditos</div>
-            <div class="opt-block" aria-label="Opciones Electiva I">
-              <div class="opt-group">
-                <button class="opt" data-opt="DINAMICA DE GRUPOS">DINÁMICA DE GRUPOS</button>
-                <button class="opt" data-opt="HIGIENE MENTAL Y PSICOFARMACOLOGIA">HIGIENE MENTAL Y PSICOFARMACOLOGÍA</button>
-                <button class="opt" data-opt="MODELOS EDUCATIVOS CONTEMPORANEOS">MODELOS EDUCATIVOS CONTEMPORÁNEOS</button>
-                <button class="opt" data-opt="TALLER DE AUTOCONOCIMIENTO">TALLER DE AUTOCONOCIMIENTO</button>
-                <button class="opt" data-opt="TALLER DE EMPRENDIMIENTO EN PSICOLOGIA">TALLER DE EMPRENDIMIENTO EN PSICOLOGÍA</button>
-                <button class="opt" data-opt="TALLER DE INTERVENCION FAMILIAR Y DE PAREJA">TALLER DE INTERVENCIÓN FAMILIAR Y DE PAREJA</button>
+        <article class="card" data-id="electiva_i" data-credits="4">
+          <div class="left">
+            <div class="badge">EL1</div>
+            <div class="meta">
+              <div class="name">ELECTIVA DISCIPLINAR/PROFESIONAL I</div>
+              <div class="credits">4 créditos</div>
+              <div class="opt-block" aria-label="Opciones Electiva I">
+                <div class="opt-group">
+                  <button class="opt" data-opt="DINAMICA DE GRUPOS">DINÁMICA DE GRUPOS</button>
+                  <button class="opt" data-opt="HIGIENE MENTAL Y PSICOFARMACOLOGIA">HIGIENE MENTAL Y PSICOFARMACOLOGÍA</button>
+                  <button class="opt" data-opt="MODELOS EDUCATIVOS CONTEMPORANEOS">MODELOS EDUCATIVOS CONTEMPORÁNEOS</button>
+                  <button class="opt" data-opt="TALLER DE AUTOCONOCIMIENTO">TALLER DE AUTOCONOCIMIENTO</button>
+                  <button class="opt" data-opt="TALLER DE EMPRENDIMIENTO EN PSICOLOGIA">TALLER DE EMPRENDIMIENTO EN PSICOLOGÍA</button>
+                  <button class="opt" data-opt="TALLER DE INTERVENCION FAMILIAR Y DE PAREJA">TALLER DE INTERVENCIÓN FAMILIAR Y DE PAREJA</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="actions"><button class="approve small">Aprobar</button></div>
-      </article>
+          <div class="actions"><button class="approve small">Aprobar</button></div>
+        </article>
 
-      <article class="card" data-id="habilita_inteligencia_contextual" data-credits="3">
-        <div class="left">
-          <div class="badge">HI</div>
-          <div class="meta">
-            <div class="name">HABILITA – INTELIGENCIA CONTEXTUAL</div>
-            <div class="credits">3 créditos</div>
-            <div class="opt-block" aria-label="Opciones Habilita Inteligencia Contextual">
-              <div class="opt-group">
-                <button class="opt" data-opt="DIRECCION Y ESTILOS DE LIDERAZGO">DIRECCIÓN Y ESTILOS DE LIDERAZGO</button>
-                <button class="opt" data-opt="INTELIGENCIA CONTEXTUAL">INTELIGENCIA CONTEXTUAL</button>
-                <button class="opt" data-opt="INTELIGENCIA, ADAPTACION E INNOVACION">INTELIGENCIA, ADAPTACIÓN E INNOVACIÓN</button>
-                <button class="opt" data-opt="PENSAMIENTO CRITICO PARA LA SOLUCION DE PROBLEMAS">PENSAMIENTO CRITICO</button>
+        <article class="card" data-id="habilita_inteligencia_contextual" data-credits="3">
+          <div class="left">
+            <div class="badge">HI</div>
+            <div class="meta">
+              <div class="name">HABILITA – INTELIGENCIA CONTEXTUAL</div>
+              <div class="credits">3 créditos</div>
+              <div class="opt-block" aria-label="Opciones Habilita Inteligencia Contextual">
+                <div class="opt-group">
+                  <button class="opt" data-opt="DIRECCION Y ESTILOS DE LIDERAZGO">DIRECCIÓN Y ESTILOS DE LIDERAZGO</button>
+                  <button class="opt" data-opt="INTELIGENCIA CONTEXTUAL">INTELIGENCIA CONTEXTUAL</button>
+                  <button class="opt" data-opt="INTELIGENCIA, ADAPTACION E INNOVACION">INTELIGENCIA, ADAPTACIÓN E INNOVACIÓN</button>
+                  <button class="opt" data-opt="PENSAMIENTO CRITICO PARA LA SOLUCION DE PROBLEMAS">PENSAMIENTO CRITICO</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="actions"><button class="approve small">Aprobar</button></div>
-      </article>
-    </div>
-  </section>
+          <div class="actions"><button class="approve small">Aprobar</button></div>
+        </article>
+      </div>
+    </section>
 
-  <!-- SEMESTRE V -->
-  <section class="semester" data-sem="5">
-    <h2>SEMESTRE V</h2>
-    <div class="sem-info">
-      <div class="small-muted">Créditos semestre: <span class="per-sem-credits" data-sem="5">0</span></div>
-      <div class="small-muted">Materias: 8</div>
-    </div>
-    <div class="subjects">
-      <article class="card" data-id="psicopatologia_ii" data-credits="5" data-req="psicopatologia_i"><div class="left"><div class="badge">P2</div><div class="meta"><div class="name">PSICOPATOLOGÍA II</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+    <!-- SEMESTRE V -->
+    <section class="semester" data-sem="5">
+      <h2>SEMESTRE V</h2>
+      <div class="sem-info">
+        <div class="small-muted">Créditos semestre: <span class="per-sem-credits" data-sem="5">0</span></div>
+        <div class="small-muted">Materias: 8</div>
+      </div>
+      <div class="subjects">
+        <article class="card" data-id="psicopatologia_ii" data-credits="5" data-req="psicopatologia_i"><div class="left"><div class="badge">P2</div><div class="meta"><div class="name">PSICOPATOLOGÍA II</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="corrientes_psicoanaliticas" data-credits="4" data-req="teoria_psicoanalitica"><div class="left"><div class="badge">CP</div><div class="meta"><div class="name">CORRIENTES PSICOANALÍTICAS</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="corrientes_psicoanaliticas" data-credits="4" data-req="teoria_psicoanalitica"><div class="left"><div class="badge">CP</div><div class="meta"><div class="name">CORRIENTES PSICOANALÍTICAS</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="evaluacion_psicologica_laboral" data-credits="5"><div class="left"><div class="badge">EL</div><div class="meta"><div class="name">EVALUACIÓN PSICOLÓGICA LABORAL</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="evaluacion_psicologica_laboral" data-credits="5"><div class="left"><div class="badge">EL</div><div class="meta"><div class="name">EVALUACIÓN PSICOLÓGICA LABORAL</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="modificacion_conducta" data-credits="4" data-req="analisis_conducta_aplicada"><div class="left"><div class="badge">MC</div><div class="meta"><div class="name">MODIFICACIÓN DE LA CONDUCTA HUMANA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="modificacion_conducta" data-credits="4" data-req="analisis_conducta_aplicada"><div class="left"><div class="badge">MC</div><div class="meta"><div class="name">MODIFICACIÓN DE LA CONDUCTA HUMANA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="electiva_ii" data-credits="4">
-        <div class="left">
-          <div class="badge">EL2</div>
-          <div class="meta">
-            <div class="name">ELECTIVA DISCIPLINAR/PROFESIONAL II</div>
-            <div class="credits">4 créditos</div>
-            <div class="opt-block" aria-label="Opciones Electiva II">
-              <div class="opt-group">
-                <button class="opt" data-opt="ACOSO ESCOLAR">ACOSO ESCOLAR</button>
-                <button class="opt" data-opt="INTERVENCION EN CRISIS">INTERVENCIÓN EN CRISIS</button>
-                <button class="opt" data-opt="PSICOLOGIA DE LA VIOLENCIA">PSICOLOGÍA DE LA VIOLENCIA</button>
-                <button class="opt" data-opt="PSICOLOGIA EXPERIMENTAL">PSICOLOGÍA EXPERIMENTAL</button>
-                <button class="opt" data-opt="PSICOTERAPIA GRUPAL">PSICOTERAPIA GRUPAL</button>
-                <button class="opt" data-opt="TALLER DE PERITAJES EN PSICOLOGIA">TALLER DE PERITAJES EN PSICOLOGÍA</button>
+        <article class="card" data-id="electiva_ii" data-credits="4">
+          <div class="left">
+            <div class="badge">EL2</div>
+            <div class="meta">
+              <div class="name">ELECTIVA DISCIPLINAR/PROFESIONAL II</div>
+              <div class="credits">4 créditos</div>
+              <div class="opt-block" aria-label="Opciones Electiva II">
+                <div class="opt-group">
+                  <button class="opt" data-opt="ACOSO ESCOLAR">ACOSO ESCOLAR</button>
+                  <button class="opt" data-opt="INTERVENCION EN CRISIS">INTERVENCIÓN EN CRISIS</button>
+                  <button class="opt" data-opt="PSICOLOGIA DE LA VIOLENCIA">PSICOLOGÍA DE LA VIOLENCIA</button>
+                  <button class="opt" data-opt="PSICOLOGIA EXPERIMENTAL">PSICOLOGÍA EXPERIMENTAL</button>
+                  <button class="opt" data-opt="PSICOTERAPIA GRUPAL">PSICOTERAPIA GRUPAL</button>
+                  <button class="opt" data-opt="TALLER DE PERITAJES EN PSICOLOGIA">TALLER DE PERITAJES EN PSICOLOGÍA</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="actions"><button class="approve small">Aprobar</button></div>
-      </article>
+          <div class="actions"><button class="approve small">Aprobar</button></div>
+        </article>
 
-      <article class="card" data-id="practicas_pre_i" data-credits="5"><div class="left"><div class="badge">PP1</div><div class="meta"><div class="name">PRÁCTICAS PRE-PROFESIONALES I</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="practicas_pre_i" data-credits="5"><div class="left"><div class="badge">PP1</div><div class="meta"><div class="name">PRÁCTICAS PRE-PROFESIONALES I</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="metodologia_i" data-credits="4"><div class="left"><div class="badge">MI</div><div class="meta"><div class="name">METODOLOGÍA DE LA INVESTIGACIÓN I</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="metodologia_i" data-credits="4"><div class="left"><div class="badge">MI</div><div class="meta"><div class="name">METODOLOGÍA DE LA INVESTIGACIÓN I</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="habilita_educacion_sostenible" data-credits="3">
-        <div class="left">
-          <div class="badge">HEd</div>
-          <div class="meta">
-            <div class="name">HABILITA – EDUCACIÓN PARA EL DESARROLLO SOSTENIBLE</div>
-            <div class="credits">3 créditos</div>
-            <div class="opt-block" aria-label="Opciones Habilita Educación Sostenible">
-              <div class="opt-group">
-                <button class="opt" data-opt="EQUIDAD DE GENERO">EQUIDAD DE GÉNERO</button>
-                <button class="opt" data-opt="FORMACION EN RESPONSABILIDAD SOCIAL UNIVERSITARIA">FORMACIÓN EN RESPONSABILIDAD</button>
-                <button class="opt" data-opt="RESPONSABILIDAD SOCIAL EN PSICOLOGIA">RESPONSABILIDAD SOCIAL EN PSICOLOGÍA</button>
-                <button class="opt" data-opt="SOSTENIBILIDAD Y RESPONSABILIDAD SOCIAL">SOSTENIBILIDAD Y RESPONSABILIDAD SOCIAL</button>
+        <article class="card" data-id="habilita_educacion_sostenible" data-credits="3">
+          <div class="left">
+            <div class="badge">HEd</div>
+            <div class="meta">
+              <div class="name">HABILITA – EDUCACIÓN PARA EL DESARROLLO SOSTENIBLE</div>
+              <div class="credits">3 créditos</div>
+              <div class="opt-block" aria-label="Opciones Habilita Educación Sostenible">
+                <div class="opt-group">
+                  <button class="opt" data-opt="EQUIDAD DE GENERO">EQUIDAD DE GÉNERO</button>
+                  <button class="opt" data-opt="FORMACION EN RESPONSABILIDAD SOCIAL UNIVERSITARIA">FORMACIÓN EN RESPONSABILIDAD</button>
+                  <button class="opt" data-opt="RESPONSABILIDAD SOCIAL EN PSICOLOGIA">RESPONSABILIDAD SOCIAL EN PSICOLOGÍA</button>
+                  <button class="opt" data-opt="SOSTENIBILIDAD Y RESPONSABILIDAD SOCIAL">SOSTENIBILIDAD Y RESPONSABILIDAD SOCIAL</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="actions"><button class="approve small">Aprobar</button></div>
-      </article>
-    </div>
-  </section>
+          <div class="actions"><button class="approve small">Aprobar</button></div>
+        </article>
+      </div>
+    </section>
 
-  <!-- SEMESTRE VI -->
-  <section class="semester" data-sem="6">
-    <h2>SEMESTRE VI</h2>
-    <div class="sem-info">
-      <div class="small-muted">Créditos semestre: <span class="per-sem-credits" data-sem="6">0</span></div>
-      <div class="small-muted">Materias: 8</div>
-    </div>
-    <div class="subjects">
-      <article class="card" data-id="evaluacion_clinica_nna" data-credits="6"><div class="left"><div class="badge">EC</div><div class="meta"><div class="name">EVALUACIÓN PSICOLÓGICA CLÍNICA EN NIÑOS Y ADOLESCENTES</div><div class="credits">6 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+    <!-- SEMESTRE VI -->
+    <section class="semester" data-sem="6">
+      <h2>SEMESTRE VI</h2>
+      <div class="sem-info">
+        <div class="small-muted">Créditos semestre: <span class="per-sem-credits" data-sem="6">0</span></div>
+        <div class="small-muted">Materias: 8</div>
+      </div>
+      <div class="subjects">
+        <article class="card" data-id="evaluacion_clinica_nna" data-credits="6"><div class="left"><div class="badge">EC</div><div class="meta"><div class="name">EVALUACIÓN PSICOLÓGICA CLÍNICA EN NIÑOS Y ADOLESCENTES</div><div class="credits">6 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="intervencion_organizacional" data-credits="3"><div class="left"><div class="badge">IO</div><div class="meta"><div class="name">INTERVENCIÓN EN EL ÁMBITO ORGANIZACIONAL</div><div class="credits">3 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="intervencion_organizacional" data-credits="3"><div class="left"><div class="badge">IO</div><div class="meta"><div class="name">INTERVENCIÓN EN EL ÁMBITO ORGANIZACIONAL</div><div class="credits">3 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="intervencion_psicodinamica" data-credits="4"><div class="left"><div class="badge">IP</div><div class="meta"><div class="name">INTERVENCIÓN PSICODINÁMICA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="intervencion_psicodinamica" data-credits="4"><div class="left"><div class="badge">IP</div><div class="meta"><div class="name">INTERVENCIÓN PSICODINÁMICA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="psicologia_humanista" data-credits="4"><div class="left"><div class="badge">PH</div><div class="meta"><div class="name">PSICOLOGÍA HUMANISTA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="psicologia_humanista" data-credits="4"><div class="left"><div class="badge">PH</div><div class="meta"><div class="name">PSICOLOGÍA HUMANISTA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="reclutamiento_seleccion" data-credits="4"><div class="left"><div class="badge">RS</div><div class="meta"><div class="name">RECLUTAMIENTO, SELECCIÓN Y CAPACITACIÓN</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="reclutamiento_seleccion" data-credits="4"><div class="left"><div class="badge">RS</div><div class="meta"><div class="name">RECLUTAMIENTO, SELECCIÓN Y CAPACITACIÓN</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="electiva_iii" data-credits="4">
-        <div class="left">
-          <div class="badge">EL3</div>
-          <div class="meta">
-            <div class="name">ELECTIVA DISCIPLINAR/PROFESIONAL III</div>
-            <div class="credits">4 créditos</div>
-            <div class="opt-block" aria-label="Opciones Electiva III">
-              <div class="opt-group">
-                <button class="opt" data-opt="CONSULTORIA Y ASESORIA EN RECURSOS HUMANOS">CONSULTORÍA Y ASESORÍA EN RRHH</button>
-                <button class="opt" data-opt="INTERVENCION EN CRISIS">INTERVENCIÓN EN CRISIS</button>
-                <button class="opt" data-opt="PSICOTERAPIA DE FAMILIA Y PAREJA">PSICOTERAPIA DE FAMILIA Y PAREJA</button>
-                <button class="opt" data-opt="TALLER DE INTERVENCION DE GRUPOS">TALLER DE INTERVENCIÓN DE GRUPOS</button>
-                <button class="opt" data-opt="TALLER DE MEDIACION">TALLER DE MEDIACIÓN</button>
-                <button class="opt" data-opt="TERAPIA FAMILIAR SISTEMICA">TERAPIA FAMILIAR SISTÉMICA</button>
+        <article class="card" data-id="electiva_iii" data-credits="4">
+          <div class="left">
+            <div class="badge">EL3</div>
+            <div class="meta">
+              <div class="name">ELECTIVA DISCIPLINAR/PROFESIONAL III</div>
+              <div class="credits">4 créditos</div>
+              <div class="opt-block" aria-label="Opciones Electiva III">
+                <div class="opt-group">
+                  <button class="opt" data-opt="CONSULTORIA Y ASESORIA EN RECURSOS HUMANOS">CONSULTORÍA Y ASESORÍA EN RRHH</button>
+                  <button class="opt" data-opt="INTERVENCION EN CRISIS">INTERVENCIÓN EN CRISIS</button>
+                  <button class="opt" data-opt="PSICOTERAPIA DE FAMILIA Y PAREJA">PSICOTERAPIA DE FAMILIA Y PAREJA</button>
+                  <button class="opt" data-opt="TALLER DE INTERVENCION DE GRUPOS">TALLER DE INTERVENCIÓN DE GRUPOS</button>
+                  <button class="opt" data-opt="TALLER DE MEDIACION">TALLER DE MEDIACIÓN</button>
+                  <button class="opt" data-opt="TERAPIA FAMILIAR SISTEMICA">TERAPIA FAMILIAR SISTÉMICA</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="actions"><button class="approve small">Aprobar</button></div>
-      </article>
+          <div class="actions"><button class="approve small">Aprobar</button></div>
+        </article>
 
-      <article class="card" data-id="practicas_pre_ii" data-credits="5"><div class="left"><div class="badge">PP2</div><div class="meta"><div class="name">PRÁCTICAS PRE-PROFESIONALES II</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="practicas_pre_ii" data-credits="5"><div class="left"><div class="badge">PP2</div><div class="meta"><div class="name">PRÁCTICAS PRE-PROFESIONALES II</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="metodologia_ii" data-credits="4" data-req="metodologia_i"><div class="left"><div class="badge">MII</div><div class="meta"><div class="name">METODOLOGÍA DE LA INVESTIGACIÓN II</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
-    </div>
-  </section>
+        <article class="card" data-id="metodologia_ii" data-credits="4" data-req="metodologia_i"><div class="left"><div class="badge">MII</div><div class="meta"><div class="name">METODOLOGÍA DE LA INVESTIGACIÓN II</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+      </div>
+    </section>
+  </div>
 
-  <!-- SEMESTRE VII -->
-  <section class="semester" data-sem="7">
-    <h2>SEMESTRE VII</h2>
-    <div class="sem-info">
-      <div class="small-muted">Créditos semestre: <span class="per-sem-credits" data-sem="7">0</span></div>
-      <div class="small-muted">Materias: 8</div>
-    </div>
-    <div class="subjects">
-      <article class="card" data-id="ingles_comprension_textos" data-credits="4"><div class="left"><div class="badge">I</div><div class="meta"><div class="name">COMPRENSIÓN DE TEXTOS EN INGLÉS</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+  <!-- COLUMNA 3: Semestres 7-9 -->
+  <div class="col">
+    <!-- SEMESTRE VII -->
+    <section class="semester" data-sem="7">
+      <h2>SEMESTRE VII</h2>
+      <div class="sem-info">
+        <div class="small-muted">Créditos semestre: <span class="per-sem-credits" data-sem="7">0</span></div>
+        <div class="small-muted">Materias: 8</div>
+      </div>
+      <div class="subjects">
+        <article class="card" data-id="ingles_comprension_textos" data-credits="4"><div class="left"><div class="badge">I</div><div class="meta"><div class="name">COMPRENSIÓN DE TEXTOS EN INGLÉS</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="evaluacion_clinica_adultos" data-credits="5"><div class="left"><div class="badge">EA</div><div class="meta"><div class="name">EVALUACIÓN PSICOLÓGICA CLÍNICA EN ADULTOS</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="evaluacion_clinica_adultos" data-credits="5"><div class="left"><div class="badge">EA</div><div class="meta"><div class="name">EVALUACIÓN PSICOLÓGICA CLÍNICA EN ADULTOS</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="intervencion_cognitivo_conductual" data-credits="4"><div class="left"><div class="badge">IC</div><div class="meta"><div class="name">INTERVENCIÓN COGNITIVO-CONDUCTUAL</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="intervencion_cognitivo_conductual" data-credits="4"><div class="left"><div class="badge">IC</div><div class="meta"><div class="name">INTERVENCIÓN COGNITIVO-CONDUCTUAL</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="psicoterapia_humanista_nna" data-credits="4" data-req="psicologia_humanista"><div class="left"><div class="badge">PHN</div><div class="meta"><div class="name">PSICOTERAPIA HUMANISTA EN NIÑOS Y ADOLESCENTES</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="psicoterapia_humanista_nna" data-credits="4" data-req="psicologia_humanista"><div class="left"><div class="badge">PHN</div><div class="meta"><div class="name">PSICOTERAPIA HUMANISTA EN NIÑOS Y ADOLESCENTES</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="trastornos_aprendizaje" data-credits="4"><div class="left"><div class="badge">TA</div><div class="meta"><div class="name">TRASTORNOS ESPECÍFICOS DEL APRENDIZAJE</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="trastornos_aprendizaje" data-credits="4"><div class="left"><div class="badge">TA</div><div class="meta"><div class="name">TRASTORNOS ESPECÍFICOS DEL APRENDIZAJE</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="electiva_iv" data-credits="4">
-        <div class="left">
-          <div class="badge">EL4</div>
-          <div class="meta">
-            <div class="name">ELECTIVA DISCIPLINAR/PROFESIONAL IV</div>
-            <div class="credits">4 créditos</div>
-            <div class="opt-block" aria-label="Opciones Electiva IV">
-              <div class="opt-group">
-                <button class="opt" data-opt="CUIDADOS PALIATIVOS Y TANATOLOGIA">CUIDADOS PALIATIVOS Y TANATOLOGÍA</button>
-                <button class="opt" data-opt="PSICOFARMACOLOGIA">PSICOFARMACOLOGÍA</button>
-                <button class="opt" data-opt="PSICOLOGIA BASADA EN EVIDENCIAS">PSICOLOGÍA BASADA EN EVIDENCIAS</button>
-                <button class="opt" data-opt="SALUD OCUPACIONAL">SALUD OCUPACIONAL</button>
-                <button class="opt" data-opt="TALLER DE TANATOLOGIA">TALLER DE TANATOLOGÍA</button>
-                <button class="opt" data-opt="TALLER DE TEMAS EMERGENTES">TALLER DE TEMAS EMERGENTES</button>
+        <article class="card" data-id="electiva_iv" data-credits="4">
+          <div class="left">
+            <div class="badge">EL4</div>
+            <div class="meta">
+              <div class="name">ELECTIVA DISCIPLINAR/PROFESIONAL IV</div>
+              <div class="credits">4 créditos</div>
+              <div class="opt-block" aria-label="Opciones Electiva IV">
+                <div class="opt-group">
+                  <button class="opt" data-opt="CUIDADOS PALIATIVOS Y TANATOLOGIA">CUIDADOS PALIATIVOS Y TANATOLOGÍA</button>
+                  <button class="opt" data-opt="PSICOFARMACOLOGIA">PSICOFARMACOLOGÍA</button>
+                  <button class="opt" data-opt="PSICOLOGIA BASADA EN EVIDENCIAS">PSICOLOGÍA BASADA EN EVIDENCIAS</button>
+                  <button class="opt" data-opt="SALUD OCUPACIONAL">SALUD OCUPACIONAL</button>
+                  <button class="opt" data-opt="TALLER DE TANATOLOGIA">TALLER DE TANATOLOGÍA</button>
+                  <button class="opt" data-opt="TALLER DE TEMAS EMERGENTES">TALLER DE TEMAS EMERGENTES</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="actions"><button class="approve small">Aprobar</button></div>
-      </article>
+          <div class="actions"><button class="approve small">Aprobar</button></div>
+        </article>
 
-      <article class="card" data-id="practicas_pre_iii" data-credits="5"><div class="left"><div class="badge">PP3</div><div class="meta"><div class="name">PRÁCTICAS PRE-PROFESIONALES III</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="practicas_pre_iii" data-credits="5"><div class="left"><div class="badge">PP3</div><div class="meta"><div class="name">PRÁCTICAS PRE-PROFESIONALES III</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="seminario_i" data-credits="4" data-req="metodologia_ii"><div class="left"><div class="badge">SI</div><div class="meta"><div class="name">SEMINARIO DE INVESTIGACIÓN I</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
-    </div>
-  </section>
+        <article class="card" data-id="seminario_i" data-credits="4" data-req="metodologia_ii"><div class="left"><div class="badge">SI</div><div class="meta"><div class="name">SEMINARIO DE INVESTIGACIÓN I</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+      </div>
+    </section>
 
-  <!-- SEMESTRE VIII -->
-  <section class="semester" data-sem="8">
-    <h2>SEMESTRE VIII</h2>
-    <div class="sem-info">
-      <div class="small-muted">Créditos semestre: <span class="per-sem-credits" data-sem="8">0</span></div>
-      <div class="small-muted">Materias: 8</div>
-    </div>
-    <div class="subjects">
-      <article class="card" data-id="ingles_redaccion_textos" data-credits="4"><div class="left"><div class="badge">IR</div><div class="meta"><div class="name">REDACCIÓN DE TEXTOS EN INGLÉS</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+    <!-- SEMESTRE VIII -->
+    <section class="semester" data-sem="8">
+      <h2>SEMESTRE VIII</h2>
+      <div class="sem-info">
+        <div class="small-muted">Créditos semestre: <span class="per-sem-credits" data-sem="8">0</span></div>
+        <div class="small-muted">Materias: 8</div>
+      </div>
+      <div class="subjects">
+        <article class="card" data-id="ingles_redaccion_textos" data-credits="4"><div class="left"><div class="badge">IR</div><div class="meta"><div class="name">REDACCIÓN DE TEXTOS EN INGLÉS</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="proyectos_comunitarios" data-credits="4"><div class="left"><div class="badge">PC</div><div class="meta"><div class="name">ELABORACIÓN DE PROYECTOS COMUNITARIOS</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="proyectos_comunitarios" data-credits="4"><div class="left"><div class="badge">PC</div><div class="meta"><div class="name">ELABORACIÓN DE PROYECTOS COMUNITARIOS</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="orientacion_vocacional" data-credits="4"><div class="left"><div class="badge">OV</div><div class="meta"><div class="name">INTERVENCIÓN EN ORIENTACIÓN VOCACIONAL</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="orientacion_vocacional" data-credits="4"><div class="left"><div class="badge">OV</div><div class="meta"><div class="name">INTERVENCIÓN EN ORIENTACIÓN VOCACIONAL</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="psicologia_salud_deporte" data-credits="4"><div class="left"><div class="badge">SD</div><div class="meta"><div class="name">PSICOLOGÍA DE LA SALUD Y EL DEPORTE</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="psicologia_salud_deporte" data-credits="4"><div class="left"><div class="badge">SD</div><div class="meta"><div class="name">PSICOLOGÍA DE LA SALUD Y EL DEPORTE</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="psicologia_juridica" data-credits="4"><div class="left"><div class="badge">PJ</div><div class="meta"><div class="name">PSICOLOGÍA JURÍDICA Y FORENSE</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="psicologia_juridica" data-credits="4"><div class="left"><div class="badge">PJ</div><div class="meta"><div class="name">PSICOLOGÍA JURÍDICA Y FORENSE</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="psicoterapia_humanista_adultos" data-credits="4" data-req="psicologia_humanista"><div class="left"><div class="badge">PHA</div><div class="meta"><div class="name">PSICOTERAPIA HUMANISTA EN ADULTOS</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="psicoterapia_humanista_adultos" data-credits="4" data-req="psicologia_humanista"><div class="left"><div class="badge">PHA</div><div class="meta"><div class="name">PSICOTERAPIA HUMANISTA EN ADULTOS</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="practica_profesional_supervision" data-credits="5"><div class="left"><div class="badge">PPS</div><div class="meta"><div class="name">PRÁCTICA PROFESIONAL: SUPERVISIÓN DE CASOS CLÍNICOS Y EDUCATIVOS</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="practica_profesional_supervision" data-credits="5"><div class="left"><div class="badge">PPS</div><div class="meta"><div class="name">PRÁCTICA PROFESIONAL: SUPERVISIÓN DE CASOS CLÍNICOS Y EDUCATIVOS</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="seminario_ii" data-credits="5" data-req="seminario_i"><div class="left"><div class="badge">SII</div><div class="meta"><div class="name">SEMINARIO DE INVESTIGACIÓN II</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
-    </div>
-  </section>
+        <article class="card" data-id="seminario_ii" data-credits="5" data-req="seminario_i"><div class="left"><div class="badge">SII</div><div class="meta"><div class="name">SEMINARIO DE INVESTIGACIÓN II</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+      </div>
+    </section>
 
-  <!-- SEMESTRE IX -->
-  <section class="semester" data-sem="9">
-    <h2>SEMESTRE IX</h2>
-    <div class="sem-info">
-      <div class="small-muted">Créditos semestre: <span class="per-sem-credits" data-sem="9">0</span></div>
-      <div class="small-muted">Materias: 6</div>
-    </div>
-    <div class="subjects">
-      <article class="card" data-id="sexualidad_humana" data-credits="5"><div class="left"><div class="badge">SX</div><div class="meta"><div class="name">SEXUALIDAD HUMANA</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+    <!-- SEMESTRE IX -->
+    <section class="semester" data-sem="9">
+      <h2>SEMESTRE IX</h2>
+      <div class="sem-info">
+        <div class="small-muted">Créditos semestre: <span class="per-sem-credits" data-sem="9">0</span></div>
+        <div class="small-muted">Materias: 6</div>
+      </div>
+      <div class="subjects">
+        <article class="card" data-id="sexualidad_humana" data-credits="5"><div class="left"><div class="badge">SX</div><div class="meta"><div class="name">SEXUALIDAD HUMANA</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="gestion_administrativa" data-credits="4"><div class="left"><div class="badge">GA</div><div class="meta"><div class="name">GESTIÓN ADMINISTRATIVA Y LEGAL DEL CAPITAL HUMANO</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="gestion_administrativa" data-credits="4"><div class="left"><div class="badge">GA</div><div class="meta"><div class="name">GESTIÓN ADMINISTRATIVA Y LEGAL DEL CAPITAL HUMANO</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="intervencion_estim_tematica" data-credits="4"><div class="left"><div class="badge">IE</div><div class="meta"><div class="name">INTERVENCIÓN EN ESTIMULACIÓN TEMPRANA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="intervencion_estim_tematica" data-credits="4"><div class="left"><div class="badge">IE</div><div class="meta"><div class="name">INTERVENCIÓN EN ESTIMULACIÓN TEMPRANA</div><div class="credits">4 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="intervencion_adulto_mayor" data-credits="5"><div class="left"><div class="badge">AM</div><div class="meta"><div class="name">INTERVENCIÓN PSICOLÓGICA DEL ADULTO MAYOR</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="intervencion_adulto_mayor" data-credits="5"><div class="left"><div class="badge">AM</div><div class="meta"><div class="name">INTERVENCIÓN PSICOLÓGICA DEL ADULTO MAYOR</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="servicio_social" data-credits="10"><div class="left"><div class="badge">SS</div><div class="meta"><div class="name">SERVICIO SOCIAL</div><div class="credits">10 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+        <article class="card" data-id="servicio_social" data-credits="10"><div class="left"><div class="badge">SS</div><div class="meta"><div class="name">SERVICIO SOCIAL</div><div class="credits">10 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
 
-      <article class="card" data-id="presentacion_proyecto_final" data-credits="5"><div class="left"><div class="badge">PF</div><div class="meta"><div class="name">PRESENTACIÓN DEL PROYECTO FINAL</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
-    </div>
-  </section>
+        <article class="card" data-id="presentacion_proyecto_final" data-credits="5"><div class="left"><div class="badge">PF</div><div class="meta"><div class="name">PRESENTACIÓN DEL PROYECTO FINAL</div><div class="credits">5 créditos</div></div></div><div class="actions"><button class="approve">Aprobar</button></div></article>
+      </div>
+    </section>
+  </div>
 
-</main>
+</div>
 
 <footer><p>Guardado en el navegador • Firma: @Nini</p></footer>
 
 <script>
 /* ---------- LocalStorage keys ---------- */
-const LS_APPROVED = "malla_approved_nini_compact_v1";
-const LS_OPTIONS = "malla_options_nini_compact_v1";
+const LS_APPROVED = "malla_approved_nini_3col_v1";
+const LS_OPTIONS = "malla_options_nini_3col_v1";
 
 /* Helpers */
 function loadApproved(){ try{ return new Set(JSON.parse(localStorage.getItem(LS_APPROVED) || "[]")); }catch(e){ return new Set(); } }
@@ -527,7 +561,7 @@ function isUnlocked(sub, approved){
   return sub.req.every(rid => approved.has(rid));
 }
 
-/* Compute credits */
+/* Compute credits totals */
 function computeCredits(approved){
   const per = {};
   let total = 0;
@@ -632,7 +666,7 @@ function wire(){
 
   // show-all
   document.getElementById('show-all').addEventListener('click', ()=>{
-    alert("Los 9 semestres se muestran en bloques verticales y compactos.");
+    alert("Los 9 semestres se muestran abajo organizados en 3 columnas. En móvil se apilan.");
   });
 }
 
